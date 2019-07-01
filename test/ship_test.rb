@@ -36,13 +36,14 @@ class ShipTest < Minitest::Test
     refute cruiser.sunk?
   end
 
-  def test_it_has_hit_method
-    
+  def test_it_has_hit_method_and_changes_health_dynamically
+    cruiser = Ship.new("Cruiser", 3)
+    cruiser.hit
 
-  end
+    assert_equal 2, cruiser.health
 
-  def test_hit_changes_health
-    skip
+    cruiser.hit
+    assert_equal 1, cruiser.health
   end
 
   def test_it_can_be_sunk_if_hit_enough
