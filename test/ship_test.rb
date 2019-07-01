@@ -25,7 +25,9 @@ class ShipTest < Minitest::Test
   end
 
   def test_it_has_health
-    skip
+    cruiser = Ship.new("Cruiser", 3)
+
+    assert_equal 3, cruiser.health
   end
 
   def test_it_returns_false_as_default_for_sunk?
