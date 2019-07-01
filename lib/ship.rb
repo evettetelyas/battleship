@@ -10,6 +10,8 @@ class Ship
   end
 
   def sunk?
+    #I think this method is kind of wordy and # I
+    #probably could have made it shorter
     if @health > 0
       false
     else
