@@ -19,8 +19,9 @@ class ShipTest < Minitest::Test
   end
 
   def test_it_has_a_length
-    skip
+    cruiser = Ship.new("Cruiser", 3)
 
+    assert_equal 3, cruiser.length
   end
 
   def test_it_has_health
