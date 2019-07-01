@@ -31,11 +31,14 @@ class ShipTest < Minitest::Test
   end
 
   def test_it_returns_false_as_default_for_sunk?
-    skip
+    cruiser = Ship.new("Cruiser", 3)
+
+    refute cruiser.sunk?
   end
 
   def test_it_has_hit_method
-    skip
+    
+
   end
 
   def test_hit_changes_health
