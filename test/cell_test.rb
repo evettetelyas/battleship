@@ -43,6 +43,13 @@ class CellTest < Minitest::Test
     assert_equal true, @cell.fired_upon?
   end
 
+  def test_shows_ship_with_s
+    @cell.place_ship(@ship)
+
+
+    assert_equal "S", @cell.render
+  end
+
   def test_render_works
     assert_equal ".", @cell.render
 

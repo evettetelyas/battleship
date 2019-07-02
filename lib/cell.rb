@@ -34,8 +34,10 @@ class Cell
   end
 
   def render
-    if !fired_upon
+    if !fired_upon && empty?
       return "."
+    elsif !fired_upon && !empty?
+      return "S"
     elsif fired_upon? && empty?
       return "M"
     elsif fired_upon? && !empty? && !@ship.sunk?
