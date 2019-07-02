@@ -33,13 +33,13 @@ class Cell
   end
 
   def render
-    if @fired_upon == false
+    if !fired_upon
       return "."
-    elsif @fired_upon == true && @ship == nil
+    elsif fired_upon? && empty?
       return "M"
-    elsif @fired_upon == true && @ship != nil && !@ship.sunk?
+    elsif fired_upon? && !empty? && !@ship.sunk?
       return "H"
-    elsif @fired_upon == true && @ship.sunk?
+    elsif fired_upon? && @ship.sunk?
       return "X"
     end
   end
