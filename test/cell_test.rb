@@ -7,7 +7,7 @@ require 'pry'
 class CellTest < Minitest::Test
 
   def setup
-    @cruiser = Ship.new("Cruiser", 3)
+    @ship = Ship.new("Cruiser", 3)
     @cell = Cell.new("B4")
   end
 
@@ -27,8 +27,25 @@ class CellTest < Minitest::Test
   end
 
   def test_can_place_ship_and_empty?
-    @cell.place_ship(@cruiser)
+    @cell.place_ship(@ship)
 
     assert_equal false, @cell.empty?
+  end
+
+  def test_it_can_be_fired_on
+    @cell.place_ship(@ship)
+
+    assert_equal false, @cell.fired_upon?
+    #binding.pry
+    @cell.fire_upon
+    assert_equal 2, @cell.ship.health
+    assert_equal true, @cell.fired_upon
+  end
+
+  def test_render_works
+    skip
+    @cell.fire_upon
+
+    assert_equal "M", @cell.render
   end
 end
