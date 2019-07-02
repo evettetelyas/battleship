@@ -27,6 +27,8 @@ class BoardTest < Minitest::Test
               D4: Cell.new(:D4)
             }
   @board = Board.new(@cells)
+  @cruiser = Ship.new("Cruiser", 3)
+  @submarine = Ship.new("Submarine", 2)
   end
 
   def test_board_exist
@@ -56,6 +58,13 @@ class BoardTest < Minitest::Test
     refute @board.valid_coordinate(:E1)
 
     refute @board.valid_coordinate(:A22)
+  end
+
+  def test_valid_placement_for_ship
+
+    refute @board.valid_placement?(@cruiser, [:A1, :A2])
+
+    refute @board.valid_placement?(@submarine, [:A2, :A3, :A4])
   end
 
 end
