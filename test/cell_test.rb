@@ -38,14 +38,18 @@ class CellTest < Minitest::Test
     assert_equal false, @cell.fired_upon?
     #binding.pry
     @cell.fire_upon
+    #binding.pry
     assert_equal 2, @cell.ship.health
     assert_equal true, @cell.fired_upon
   end
 
   def test_render_works
     skip
+    #binding.pry
+    #assert_equal ".", @cell.render
     @cell.fire_upon
-
+    #binding.pry
+    #binding.pry
     assert_equal "M", @cell.render
   end
 end

@@ -3,8 +3,9 @@ class Cell
 
   def initialize(coodinate, ship = nil, fired_upon = false )
     @coodinate = coodinate
-    @ship = ship
+    @ship = nil
     @fired_upon = fired_upon
+    @space = ""
   end
 
   def empty?
@@ -24,24 +25,27 @@ class Cell
   end
 
   def fire_upon
-    @ship.hit
-    @fired_upon = true
-    # @ship.health -= 1
+    if @ship != nil
+      @ship.hit
+      @fired_upon = true
+    end
+    @ship.health - 1
     # @fired_upon = true
   end
 
-#   def render
-#     if @fired_upon = false
-#       "."
-#     elsif
-#       @fired_upon = true && @ship = nil
-#         "M"
-#     elsif
-#       @fired_upon = true && @ship != nil
-#         "H"
-#     elsif
-#       @ship.health = 0
-#       "X"
-#     end
-#   end
+  def render
+    # if @fired_upon = false
+    #   "."
+    if
+      @fired_upon = true && @ship == nil
+        @space = "M"
+    end
+    # elsif
+    #   @fired_upon = true && @ship != nil
+    #     "H"
+    # elsif
+    #   @ship.health = 0
+    #   {}"X"
+    @space
+  end
  end
