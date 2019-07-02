@@ -39,4 +39,23 @@ class BoardTest < Minitest::Test
     assert_instance_of Hash, @board.cells
   end
 
+  def test_board_has_cells
+
+    assert_instance_of Hash, @board.cells
+    assert_equal 16, @board.cells.count
+  end
+
+  def test_if_coordinate_is_valid
+
+    assert @board.valid_coordinate(:A1)
+
+    assert @board.valid_coordinate(:D4)
+
+    refute @board.valid_coordinate(:A5)
+
+    refute @board.valid_coordinate(:E1)
+
+    refute @board.valid_coordinate(:A22)
+  end
+
 end
