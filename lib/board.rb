@@ -1,16 +1,8 @@
 class Board
-
   attr_reader :cells
 
-  def initialize()
+  def initialize(cells)
     @cells = cells
   end
-
-  def setup
-    @cells = {}
-
-
-
-
 
 end
