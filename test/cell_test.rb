@@ -18,7 +18,7 @@ class CellTest < Minitest::Test
 
   def test_ship_method_returns_nil
 
-    assert_equal nil, @cell.ship
+    assert_nil @cell.ship
   end
 
   def test_it_has_true_for_empty?
@@ -36,20 +36,27 @@ class CellTest < Minitest::Test
     @cell.place_ship(@ship)
 
     assert_equal false, @cell.fired_upon?
-    #binding.pry
+
     @cell.fire_upon
-    #binding.pry
+
     assert_equal 2, @cell.ship.health
-    assert_equal true, @cell.fired_upon
+    assert_equal true, @cell.fired_upon?
   end
 
   def test_render_works
-    skip
-    #binding.pry
-    #assert_equal ".", @cell.render
+    assert_equal ".", @cell.render
+
     @cell.fire_upon
-    #binding.pry
-    #binding.pry
+
     assert_equal "M", @cell.render
+
+    @cell.place_ship(@ship)
+    @cell.fire_upon
+
+    assert_equal "H", @cell.render
+    assert_equal 2, @ship.health
+
+    2.times {@cell.fire_upon}
+    assert_equal "X", @cell.render
   end
 end
