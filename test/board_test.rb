@@ -37,7 +37,6 @@ class BoardTest < Minitest::Test
   def test_board_has_cells
 
     assert_instance_of Hash, @board.cells
-
   end
 
 end
