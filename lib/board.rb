@@ -9,6 +9,8 @@ class Board
     @cells.keys.include?(coordinate)
   end
 
+  
+
   def valid_placement?(ship, coordinates)
     return false unless all_cells_on_board?(@cells)
     return false unless all_cells_empty?(@cells)
