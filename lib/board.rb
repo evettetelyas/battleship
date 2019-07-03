@@ -5,27 +5,23 @@ class Board
     @cells = cells
   end
 
-  def valid_coordinate(coordinate)
-    @cells.keys.include?(coordinate)
+  def valid_coordinate(coordinates)
+    
+  end
+
+  def all_cells_empty?(coordinates)
+
   end
 
   def valid_placement?(ship, coordinates)
-    return false unless all_cells_on_board?(@cells)
-    return false unless all_cells_empty?(@cells)
+    return false unless valid_coordinate(coordinates)
+    return false unless all_cells_empty?(coordinates)
     return false unless ship.length == coordinates.count
-    if all_letters_same?(coordinates) && numbers_sequential?(coordinates)
-      true
-    elsif all_numbers_same?(coordinates) && letters_sequential?(coordinates)
-      true
-    else
-      false
-    end
+    return false unless (all_letters_same?(coordinates) && numbers_sequential?(coordinates)) || (all_numbers_same?(coordinates) && letters_sequential?(coordinates))
   end
 
   def all_letters_same?(coordinates)
-    split_coordinates = coordinates.map do |coordinate|
-        coordinate.to_s.split("")
-      end
+    split_coordinates = coordinates.map {|coordinate| coordinate.to_s.chars}
 
     num_of_uniq_letter = split_coordinates.map { |c| c[0] }.uniq.length
 
@@ -33,9 +29,7 @@ class Board
   end
 
   def all_letters_uniq?(coordinates)
-    split_coordinates = coordinates.map do |coordinate|
-        coordinate.to_s.split("")
-      end
+    split_coordinates = coordinates.map {|coordinate| coordinate.to_s.chars}
 
     num_of_uniq_letter = split_coordinates.map { |c| c[0] }.uniq.length
 
@@ -43,9 +37,7 @@ class Board
   end
 
   def all_numbers_same?(coordinates)
-    split_coordinates = coordinates.map do |coordinate|
-        coordinate.to_s.split("")
-      end
+    split_coordinates = coordinates.map {|coordinate| coordinate.to_s.chars}
 
     num_of_uniq_num = split_coordinates.map { |c| c[1] }.uniq.length
 
@@ -53,9 +45,7 @@ class Board
   end
 
   def numbers_sequential?(coordinates)
-    split_coordinates = coordinates.map do |coordinate|
-      coordinate.to_s.chars
-    end
+    split_coordinates = coordinates.map {|coordinate| coordinate.to_s.chars}
 
     # this will break for boards 10x10 or bigger
     num_i = split_coordinates.map { |c| c[1].to_i }
@@ -66,9 +56,7 @@ class Board
   end
 
   def letters_sequential?(coordinates)
-    split_coordinates = coordinates.map do |coordinate|
-      coordinate.to_s.chars
-    end
+    split_coordinates = coordinates.map {|coordinate| coordinate.to_s.chars}
 
     let_ord = split_coordinates.map { |c| c[0].ord }
 
@@ -84,4 +72,5 @@ class Board
   #     end
   #   end
   # end
+
 end

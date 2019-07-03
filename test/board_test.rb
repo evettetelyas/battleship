@@ -26,9 +26,9 @@ class BoardTest < Minitest::Test
               D3: Cell.new(:D3),
               D4: Cell.new(:D4)
             }
-  @board = Board.new(@cells)
-  @cruiser = Ship.new("Cruiser", 3)
-  @submarine = Ship.new("Submarine", 2)
+            @board = Board.new(@cells)
+            @cruiser = Ship.new("Cruiser", 3)
+            @submarine = Ship.new("Submarine", 2)
   end
 
   def test_board_exist
@@ -64,7 +64,7 @@ class BoardTest < Minitest::Test
     refute @board.valid_placement?(@cruiser, [:A1, :B2, :C3])
     refute @board.valid_placement?(@submarine, [:C2, :D3])
     assert @board.valid_placement?(@cruiser, [:B1, :C1, :D1])
-    #assert @board.valid_placement?(@submarine, [:A1, :A2])
+    assert @board.valid_placement?(@submarine, [:A1, :A2])
   end
 
   def test_all_letters_of_coordinates_same
