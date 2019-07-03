@@ -106,7 +106,28 @@ class BoardTest < Minitest::Test
     coordinates_3 = [:A1, :B2, :C3]
 
     assert @board.numbers_sequential?(coordinates_3)
+
+    coordinates_4 = [:A3, :B2, :C1]
+
+    refute @board.numbers_sequential?(coordinates_4)
   end
 
+  def test_letters_are_sequential
+    coordinates_1 = [:A1, :A2, :A3]
+
+    refute @board.letters_sequential?(coordinates_1)
+
+    coordinates_2 = [:A1, :B2, :C3]
+
+    assert @board.letters_sequential?(coordinates_2)
+
+    coordinates_3 = [:A1, :B1, :C1, :D1, :E1]
+
+    assert @board.letters_sequential?(coordinates_3)
+
+    coordinates_4 = [:E1, :D1, :C1, :B1, :A1]
+
+    refute @board.letters_sequential?(coordinates_4)
+  end
 
 end

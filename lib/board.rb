@@ -43,11 +43,18 @@ class Board
     num_i = num.map { |n| n.to_i }
 
     num_i.each_cons(2).all? { |first, second| second == first + 1 }
-
   end
 
+  def letters_sequential?(coordinates)
+    split_coordinates = coordinates.map { |coordinate|
+        coordinate.to_s.split("") }
 
+    let = split_coordinates.map { |c| c[0] }
 
+    let_ord = let.map { |l| l.ord}
+
+    let_ord.each_cons(2).all? { |first, second| second == first + 1 }
+  end
 
 end
 
