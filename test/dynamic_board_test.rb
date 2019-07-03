@@ -50,8 +50,8 @@ class DynamicBoardTest < Minitest::Test
     assert_instance_of Cell, dynamic_board.cell[:D4]
     assert_instance_of Cell, dynamic_board.cell[:B2]
     assert_instance_of Cell, dynamic_board.cell[:A3]
-    refute_instance_of Cell, dynamic_board.cell[:A6]
-    refute_instance_of Cell, dynamic_board.cell[:E2]
+    refute_instance_of Cell, dynamic_board.cell[:A11]
+    refute_instance_of Cell, dynamic_board.cell[:L2]
   end
 
 end

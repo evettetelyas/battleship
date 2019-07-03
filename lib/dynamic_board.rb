@@ -17,9 +17,13 @@ attr_reader :x_axis, :y_axis, :height, :width, :letters_numbers, :cell
     print "Width: "
     @width = gets.chomp.to_i
     if @height < 4 || @width < 4
-      puts "Your board is too small. Both height and width must be at least 4 cells. Automatically set board to 4x4 board."
+      puts "Your board is too small. Both height and width must be at least 4 cells. Automatically set to 4x4 board."
         @height = 4
         @width = 4
+      elsif @height > 9 || @width > 9
+        puts "Your board is too big. Both height and width must be 9 cells or less. Automatically set to 9x9 board."
+          @height = 9
+          @width = 9
     end
   end
 
