@@ -40,18 +40,18 @@ class DynamicBoardTest < Minitest::Test
     assert_equal ["A", "B", "C", "D"], dynamic_board.x_axis
   end
 
-  def test_create_cell_ids
+  def test_create_cells
     dynamic_board = DynamicBoard.new
     dynamic_board.set_size
     dynamic_board.set_y_axis_grid_coordinate_array
     dynamic_board.set_x_axis_grid_coordinate_array
     dynamic_board.create_cells
 
-    assert_instance_of Cell, dynamic_board.cell["D4"]
-    assert_instance_of Cell, dynamic_board.cell["B2"]
-    assert_instance_of Cell, dynamic_board.cell["A3"]
-    refute_instance_of Cell, dynamic_board.cell["A6"]
-    refute_instance_of Cell, dynamic_board.cell["E2"]
+    assert_instance_of Cell, dynamic_board.cell[:D4]
+    assert_instance_of Cell, dynamic_board.cell[:B2]
+    assert_instance_of Cell, dynamic_board.cell[:A3]
+    refute_instance_of Cell, dynamic_board.cell[:A11]
+    refute_instance_of Cell, dynamic_board.cell[:L2]
   end
 
 end
