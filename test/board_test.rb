@@ -62,4 +62,18 @@ class BoardTest < Minitest::Test
     refute @board.valid_placement?(@submarine, [:A2, :A3, :A4])
   end
 
+  def test_all_letters_of_coordinates_same
+    coordinates_1 = [:A1, :A2, :A3]
+
+    assert @board.all_letters_same?(coordinates_1)
+
+    coordinates_2 = [:A1, :A2, :A4]
+
+    assert @board.all_letters_same?(coordinates_2)
+
+    coordinates_3 = [:A1, :B2, :A4]
+
+    refute @board.all_letters_same?(coordinates_3)
+  end
+
 end
