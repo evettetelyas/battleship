@@ -39,11 +39,6 @@ class BoardTest < Minitest::Test
   def test_board_has_cells
 
     assert_instance_of Hash, @board.cells
-  end
-
-  def test_board_has_cells
-
-    assert_instance_of Hash, @board.cells
     assert_equal 16, @board.cells.count
   end
 
@@ -53,6 +48,20 @@ class BoardTest < Minitest::Test
     refute @board.valid_coordinate(:A5)
     refute @board.valid_coordinate(:E1)
     refute @board.valid_coordinate(:A22)
+  end
+
+  def test_if_valid_multiple_coordinates
+    coordinates_1 = [:A1, :A2, :A3]
+
+    assert @board.valid_multiple_coordinates(coordinates_1)
+  end
+
+  def test_all_cells_empty?
+    coordinates_1 = [:A1, :A2, :A3]
+    coordinates_2 = [:A1, :B1, :C1]
+
+    assert @board.all_cells_empty?(coordinates_1)
+    assert @board.all_cells_empty?(coordinates_2)
   end
 
   def test_valid_placement_for_ship
@@ -118,9 +127,7 @@ class BoardTest < Minitest::Test
 
   def test_place_ship
     skip
-    @board.place(@cruiser, [:A1, :A2, :A3])
 
-    assert_equal @cruiser, @cells[:A1]
   end
 
 end
