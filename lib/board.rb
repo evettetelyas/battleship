@@ -10,9 +10,12 @@ class Board
   end
 
   def valid_placement?(ship, coordinates)
-    if all_letters_same? && numbers_sequential? && ship.length == coordinates.count
+    if all_letters_same?(coordinates) && numbers_sequential?(coordinates) && ship.length == coordinates.count
       true
-    elsif a
+    elsif all_letters_uniq?(coordinates) && all_numbers_same?(coordinates) && letters_sequential?(coordinates) && ship.length == coordinates.count
+      true
+    else
+      false
     end
   end
 
