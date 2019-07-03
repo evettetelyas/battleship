@@ -10,8 +10,10 @@ class Board
   end
 
   def valid_placement?(ship, coordinates)
-
-    ship.length == coordinates.count
+    if all_letters_same? && numbers_sequential? && ship.length == coordinates.count
+      true
+    elsif a
+    end
   end
 
   def all_letters_same?(coordinates)
@@ -22,6 +24,16 @@ class Board
     num_of_uniq_letter = split_coordinates.map { |c| c[0] }.uniq.length
 
     num_of_uniq_letter == 1
+  end
+
+  def all_letters_uniq?(coordinates)
+    split_coordinates = coordinates.map do |coordinate|
+        coordinate.to_s.split("")
+      end
+
+    num_of_uniq_letter = split_coordinates.map { |c| c[0] }.uniq.length
+
+    num_of_uniq_letter == split_coordinates.count
   end
 
   def all_numbers_same?(coordinates)

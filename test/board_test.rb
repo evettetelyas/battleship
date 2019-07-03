@@ -56,7 +56,6 @@ class BoardTest < Minitest::Test
   end
 
   def test_valid_placement_for_ship
-
     refute @board.valid_placement?(@cruiser, [:A1, :A2])
 
     refute @board.valid_placement?(@submarine, [:A2, :A3, :A4])
@@ -74,6 +73,16 @@ class BoardTest < Minitest::Test
     coordinates_3 = [:A1, :B2, :A4]
 
     refute @board.all_letters_same?(coordinates_3)
+  end
+
+  def test_all_letters_uniq
+    coordinates_1 = [:A1, :B2, :C3, :D4]
+
+    assert @board.all_letters_uniq?(coordinates_1)
+
+    coordinates_2 = [:A1, :B2, :B3, :D4]
+
+    refute @board.all_letters_uniq?(coordinates_2)
   end
 
   def test_all_numbers_are_same
