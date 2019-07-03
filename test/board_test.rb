@@ -81,9 +81,9 @@ class BoardTest < Minitest::Test
 
     assert @board.all_numbers_same?(coordinates_1)
 
-    coordinates_2 = [:A1, :A1, :A1]
+    coordinates_2 = [:A1, :B2, :C3]
 
-    assert @board.all_numbers_same?(coordinates_2)
+    refute @board.all_numbers_same?(coordinates_2)
 
     coordinates_3 = [:A1, :B1, :D1]
 
@@ -93,5 +93,20 @@ class BoardTest < Minitest::Test
 
     assert @board.all_numbers_same?(coordinates_4)
   end
+
+  def test_numbers_are_sequential
+    coordinates_1 = [:A1, :A2, :A3]
+
+    assert @board.numbers_sequential?(coordinates_1)
+
+    coordinates_2 = [:A1, :A2, :A4]
+
+    refute @board.numbers_sequential?(coordinates_2)
+
+    coordinates_3 = [:A1, :B2, :C3]
+
+    assert @board.numbers_sequential?(coordinates_3)
+  end
+
 
 end
