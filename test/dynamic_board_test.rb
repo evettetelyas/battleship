@@ -47,11 +47,11 @@ class DynamicBoardTest < Minitest::Test
     dynamic_board.set_x_axis_grid_coordinate_array
     dynamic_board.create_cells
 
-    assert_instance_of Cell, dynamic_board.cell["D4"]
-    assert_instance_of Cell, dynamic_board.cell["B2"]
-    assert_instance_of Cell, dynamic_board.cell["A3"]
-    refute_instance_of Cell, dynamic_board.cell["A6"]
-    refute_instance_of Cell, dynamic_board.cell["E2"]
+    assert_instance_of Cell, dynamic_board.cell[:D4]
+    assert_instance_of Cell, dynamic_board.cell[:B2]
+    assert_instance_of Cell, dynamic_board.cell[:A3]
+    refute_instance_of Cell, dynamic_board.cell[:A6]
+    refute_instance_of Cell, dynamic_board.cell[:E2]
   end
 
 end
