@@ -76,4 +76,22 @@ class BoardTest < Minitest::Test
     refute @board.all_letters_same?(coordinates_3)
   end
 
+  def test_all_numbers_are_same
+    coordinates_1 = [:A1, :B1, :C1]
+
+    assert @board.all_numbers_same?(coordinates_1)
+
+    coordinates_2 = [:A1, :A1, :A1]
+
+    assert @board.all_numbers_same?(coordinates_2)
+
+    coordinates_3 = [:A1, :B1, :D1]
+
+    assert @board.all_numbers_same?(coordinates_3)
+
+    coordinates_4 = [:A3, :B3, :C3]
+
+    assert @board.all_numbers_same?(coordinates_4)
+  end
+
 end

@@ -29,6 +29,21 @@ class Board
     end
   end
 
+  def all_numbers_same?(coordinates)
+
+    split_coordinates = coordinates.map do |coordinate|
+        coordinate.to_s.split("")
+      end
+
+    num_of_uniq_num = split_coordinates.map { |c| c[1] }.uniq.length
+
+    if num_of_uniq_num == 1
+      true
+    else
+      false
+    end
+  end
+
 
 end
 
