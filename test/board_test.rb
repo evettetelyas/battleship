@@ -150,8 +150,7 @@ class BoardTest < Minitest::Test
     # @board.place(@cruiser, coordinates_1)
     # @board.place(@submarine, coordinates_2)
     @board.render
-    binding.pry
-    assert_equal "  1 2 3 4 \n", @board.render
+    assert_equal "  1 2 3 4 \nA . . . . \nB . . . . \nC . . . . \nD . . . . \n", @board.render
   end
 
     #   1 2 3 4

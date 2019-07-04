@@ -87,16 +87,32 @@ class Board
         coordinate.to_s.chars}
 
     num_ary = split_coordinates.map {|c| c[1]}.uniq
-
-    line_1 = "  "
-
-    line_1 += (num_ary.join(" ") + " \n")
-
-    letter_ary = split_coordinates.map {|c| c[0]}.uniq
-
+    num_times = num_ary.sort.last.to_i
+    # letter_ary = split_coordinates.map {|c| c[0]}.uniq
     id_strings = @cells.keys.collect {|symbol| symbol.to_s}
 
+    render_output = "  "
+
+    render_output += (num_ary.join(" ") + " \n") + "A "
+
+    row_output = num_times.times do
+      @cells.each do |cell|
+        p @cells[].render
+      end
+    end
+
     a_spaces = id_strings.select {|id| id.include?("A")}
+    a_spaces_symbols = a_spaces.map {|id| id.to_sym}
+
+    b_spaces = id_strings.select {|id| id.include?("B")}
+    b_spaces_symbols = b_spaces.map {|id| id.to_sym}
+
+    c_spaces = id_strings.select {|id| id.include?("C")}
+    c_spaces_symbols = c_spaces.map {|id| id.to_sym}
+
+    d_spaces = id_strings.select {|id| id.include?("D")}
+    d_spaces_symbols = d_spaces.map {|id| id.to_sym}
+
 
   end
 
