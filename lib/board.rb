@@ -16,8 +16,8 @@ class Board
   end
 
   def all_cells_empty?(coordinates)
-    coordinates.each do |coordinate|
-      @cells[coordinate].render == "."
+    coordinates.map do |coordinate|
+      @cells[coordinate].empty?
     end
   end
 
@@ -83,6 +83,10 @@ class Board
     let_ord = let.map { |l| l.ord}
 
     let_ord.each_cons(2).all? { |first, second| second == first + 1 }
+  end
+
+  def place(ship, coordinates)
+    coordinates.map {|coordinate| @cells[coordinate].place_ship(ship)}
   end
 
 end

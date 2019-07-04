@@ -126,8 +126,18 @@ class BoardTest < Minitest::Test
   end
 
   def test_place_ship
-    skip
+    coordinates_1 = [:A1, :A2, :A3]
+    coordinates_2 = [:B1, :B2]
+    @board.place(@cruiser, coordinates_1)
+    @board.place(@submarine, coordinates_2)
 
+
+    assert @board.cells[:A1].ship != nil
+    assert @board.cells[:A2].ship != nil
+    assert @board.cells[:A3].ship != nil
+    assert @board.cells[:B1].ship != nil
+    assert @board.cells[:B2].ship != nil
+    refute @board.cells[:B3].ship != nil
   end
 
 end
