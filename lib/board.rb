@@ -16,21 +16,16 @@ class Board
   end
 
   def all_cells_empty?(coordinates)
-    coordinates.map do |coordinate|
-      @cells[coordinate].empty?
+      coordinates.map do |coordinate|
+      @cells[coordinate].ship == nil
     end
   end
 
   def valid_placement?(ship, coordinates)
     return false unless valid_multiple_coordinates(coordinates)
     return false unless all_cells_empty?(coordinates)
-    if all_letters_same?(coordinates) && numbers_sequential?(coordinates) && ship.length == coordinates.count
-      true
-    elsif all_letters_uniq?(coordinates) && all_numbers_same?(coordinates) && letters_sequential?(coordinates) && ship.length == coordinates.count
-      true
-    else
-      false
-    end
+    return true if all_letters_same?(coordinates) && numbers_sequential?(coordinates) && ship.length == coordinates.count
+    return true if all_letters_uniq?(coordinates) && all_numbers_same?(coordinates) && letters_sequential?(coordinates) && ship.length == coordinates.count
   end
 
   def all_letters_same?(coordinates)
