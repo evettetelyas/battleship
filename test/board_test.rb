@@ -132,12 +132,13 @@ class BoardTest < Minitest::Test
     @board.place(@submarine, coordinates_2)
 
 
-    assert @board.cells[:A1].ship != nil
-    assert @board.cells[:A2].ship != nil
-    assert @board.cells[:A3].ship != nil
-    assert @board.cells[:B1].ship != nil
-    assert @board.cells[:B2].ship != nil
+    assert @board.cells[:A1].ship == @cruiser
+    assert @board.cells[:A2].ship == @cruiser
+    assert @board.cells[:A3].ship == @cruiser
+    assert @board.cells[:B1].ship == @submarine
+    assert @board.cells[:B2].ship == @submarine
     refute @board.cells[:B3].ship != nil
+    refute @board.valid_placement?(@submarine, [:A1, :A2])
   end
 
 end
