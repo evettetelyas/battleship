@@ -39,11 +39,6 @@ class BoardTest < Minitest::Test
   def test_board_has_cells
 
     assert_instance_of Hash, @board.cells
-  end
-
-  def test_board_has_cells
-
-    assert_instance_of Hash, @board.cells
     assert_equal 16, @board.cells.count
   end
 
@@ -55,6 +50,20 @@ class BoardTest < Minitest::Test
     refute @board.valid_coordinate(:A22)
   end
 
+  def test_if_valid_multiple_coordinates
+    coordinates_1 = [:A1, :A2, :A3]
+
+    assert @board.valid_multiple_coordinates(coordinates_1)
+  end
+
+  def test_all_cells_empty?
+    coordinates_1 = [:A1, :A2, :A3]
+    coordinates_2 = [:A1, :B1, :C1]
+
+    assert @board.all_cells_empty?(coordinates_1)
+    assert @board.all_cells_empty?(coordinates_2)
+  end
+
   def test_valid_placement_for_ship
     refute @board.valid_placement?(@cruiser, [:A3, :A2, :A1])
     refute @board.valid_placement?(@cruiser, [:A1, :A2, :A4])
@@ -64,7 +73,7 @@ class BoardTest < Minitest::Test
     refute @board.valid_placement?(@cruiser, [:A1, :B2, :C3])
     refute @board.valid_placement?(@submarine, [:C2, :D3])
     assert @board.valid_placement?(@cruiser, [:B1, :C1, :D1])
-    #assert @board.valid_placement?(@submarine, [:A1, :A2])
+    assert @board.valid_placement?(@submarine, [:A1, :A2])
   end
 
   def test_all_letters_of_coordinates_same
@@ -117,10 +126,18 @@ class BoardTest < Minitest::Test
   end
 
   def test_place_ship
-    skip
-    @board.place(@cruiser, [:A1, :A2, :A3])
+    coordinates_1 = [:A1, :A2, :A3]
+    coordinates_2 = [:B1, :B2]
+    @board.place(@cruiser, coordinates_1)
+    @board.place(@submarine, coordinates_2)
 
-    assert_equal @cruiser, @cells[:A1]
+
+    assert @board.cells[:A1].ship != nil
+    assert @board.cells[:A2].ship != nil
+    assert @board.cells[:A3].ship != nil
+    assert @board.cells[:B1].ship != nil
+    assert @board.cells[:B2].ship != nil
+    refute @board.cells[:B3].ship != nil
   end
 
 end
