@@ -16,8 +16,8 @@ class Board
   end
 
   def all_cells_empty?(coordinates)
-      coordinates.map do |coordinate|
-      @cells[coordinate].ship == nil
+      coordinates.all? do |coordinate|
+      @cells[coordinate].empty?
     end
   end
 

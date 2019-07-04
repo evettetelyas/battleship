@@ -132,7 +132,8 @@ class BoardTest < Minitest::Test
     coordinates_2 = [:B1, :B2]
     @board.place(@cruiser, coordinates_1)
     @board.place(@submarine, coordinates_2)
-
+    sailboat = Ship.new("Sailboat", 2)
+    kayak = Ship.new("Kayak", 2)
 
     assert @board.cells[:A1].ship == @cruiser
     assert @board.cells[:A2].ship == @cruiser
@@ -141,6 +142,8 @@ class BoardTest < Minitest::Test
     assert @board.cells[:B2].ship == @submarine
     refute @board.cells[:B3].ship != nil
     refute @board.valid_placement?(@submarine, [:A1, :A2])
+    refute @board.valid_placement?(kayak, [:A3, :B3])
+    assert @board.valid_placement?(sailboat, [:C3, :C4])
   end
 
 end
