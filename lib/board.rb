@@ -82,4 +82,23 @@ class Board
     coordinates.map {|coordinate| @cells[coordinate].place_ship(ship)}
   end
 
+  def render
+    split_coordinates = @cells.keys.map {|coordinate|
+        coordinate.to_s.chars}
+
+    num_ary = split_coordinates.map {|c| c[1]}.uniq
+
+    line_1 = "  "
+
+    line_1 += (num_ary.join(" ") + " \n")
+
+    letter_ary = split_coordinates.map {|c| c[0]}.uniq
+
+    id_strings = @cells.keys.collect {|symbol| symbol.to_s}
+
+    a_spaces = id_strings.select {|id| id.include?("A")}
+
+  end
+
+
 end
