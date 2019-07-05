@@ -53,7 +53,7 @@ class BoardTest < Minitest::Test
   def test_if_valid_multiple_coordinates
     coordinates_1 = [:A1, :A2, :A3]
 
-    assert @board.valid_multiple_coordinates?(coordinates_1)
+    assert @board.valid_multiple_coordinates(coordinates_1)
   end
 
   def test_all_cells_empty?
@@ -62,8 +62,8 @@ class BoardTest < Minitest::Test
     @board.place(@cruiser, coordinates_1)
     @board.place(@submarine, coordinates_2)
 
-    assert @board.all_cells_empty?(coordinates_1)
-    assert @board.all_cells_empty?(coordinates_2)
+    refute @board.all_cells_empty?(coordinates_1)
+    refute @board.all_cells_empty?(coordinates_2)
   end
 
   def test_valid_placement_for_ship

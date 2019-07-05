@@ -9,7 +9,7 @@ class Board
     @cells.keys.include?(coordinate)
   end
 
-  def valid_multiple_coordinates?(coordinates)
+  def valid_multiple_coordinates(coordinates)
     coordinates.each do |coordinate|
       @cells.keys.include?(coordinate)
     end
