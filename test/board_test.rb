@@ -144,4 +144,23 @@ class BoardTest < Minitest::Test
     assert @board.valid_placement?(sailboat, [:C3, :C4])
   end
 
+  def test_board_render
+    @board.render
+    assert_equal "  1 2 3 4 \nA . . . . \nB . . . . \nC . . . . \nD . . . . \n", @board.render
+
+    coordinates_1 = [:A1, :A2, :A3]
+    coordinates_2 = [:B1, :B2]
+    @board.place(@cruiser, coordinates_1)
+    @board.place(@submarine, coordinates_2)
+    @board.render
+
+        assert_equal "  1 2 3 4 \nA S S S . \nB S S . . \nC . . . . \nD . . . . \n", @board.render
+  end
+
+    #   1 2 3 4
+    # A . . . .
+    # B . . . .
+    # C . . . .
+    # D . . . .
+
 end
