@@ -123,5 +123,19 @@ class Board
     "D #{@cells[:D1].render} #{@cells[:D2].render} #{@cells[:D3].render} #{@cells[:D4].render} \n"
   end
 
+  def place_comp_cruiser(ship)
+    comp_placement = []
+     until valid_placement?(ship, comp_placement)
+       comp_placement = @cells.keys.sample(ship.length)
+     end
+      place(ship, comp_placement)
+  end
+end
 
+def place_comp_submarine(ship)
+  comp_placement = []
+   until valid_placement?(ship, comp_placement)
+     comp_placement = @cells.keys.sample(ship.length)
+   end
+    place(ship, comp_placement)
 end
