@@ -78,7 +78,15 @@ class GameTest < Minitest::Test
   end
 
   def test_place_player_ships
+    assert @player_board.all_cells_empty?([:A1, :A2, :A3, :A4, :B1, :B2, :B3, :B4, :C1, :C2, :C3, :C4,:D1, :D2, :D3, :D4])
+
     @game.place_player_cruiser
+
+    refute @player_board.all_cells_empty?([:A1, :A2, :A3, :A4, :B1, :B2, :B3, :B4, :C1, :C2, :C3, :C4,:D1, :D2, :D3, :D4])
+
+    @game.place_player_submarine
+
+    refute @player_board.all_cells_empty?([:A1, :A2, :A3, :A4, :B1, :B2, :B3, :B4, :C1, :C2, :C3, :C4,:D1, :D2, :D3, :D4])
   end
 
 end
