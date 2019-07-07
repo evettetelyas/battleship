@@ -123,5 +123,23 @@ class Board
     "D #{@cells[:D1].render} #{@cells[:D2].render} #{@cells[:D3].render} #{@cells[:D4].render} \n"
   end
 
+  def place_comp_ship(ship)
+    comp_placement = []
+     until valid_placement?(ship, comp_placement)
+       comp_placement = @cells.keys.sample(ship.length)
+     end
+      place(ship, comp_placement)
+  end
+
+  def place_player_ship(ship)
+    player_placement = []
+    until valid_placement?(ship, player_placement)
+      puts "Those are invalid coordinates. Please try again:"
+      print "> "
+    end
+    place(ship, player_placement)
+  end
+
+
 
 end
