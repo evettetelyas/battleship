@@ -65,7 +65,6 @@ def test_access_boards
 end
 
 def test_start_p
-  binding.pry
 
   assert_nil @game.start
 end

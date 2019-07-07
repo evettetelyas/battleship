@@ -47,7 +47,7 @@ class CellTest < Minitest::Test
     @cell.place_ship(@ship)
 
 
-    assert_equal "S", @cell.render
+    assert_equal "S", @cell.render(true)
   end
 
   def test_render_works

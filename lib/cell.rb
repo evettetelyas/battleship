@@ -33,11 +33,16 @@ class Cell
     end
   end
 
-  def render
-    if !fired_upon && empty?
+  def render(show = false)
+    @show = show
+    if !fired_upon && !empty?
+      if @show == true
+        return "S"
+      else
+        return "."
+      end
+    elsif !fired_upon && empty?
       return "."
-    elsif !fired_upon && !empty?
-      return "S"
     elsif fired_upon? && empty?
       return "M"
     elsif fired_upon? && !empty? && !@ship.sunk?
@@ -46,4 +51,6 @@ class Cell
       return "X"
     end
   end
+
+
  end
