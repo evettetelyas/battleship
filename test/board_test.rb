@@ -58,10 +58,12 @@ class BoardTest < Minitest::Test
 
   def test_all_cells_empty?
     coordinates_1 = [:A1, :A2, :A3]
-    coordinates_2 = [:A1, :B1, :C1]
+    coordinates_2 = [:B1, :B2]
+    @board.place(@cruiser, coordinates_1)
+    @board.place(@submarine, coordinates_2)
 
-    assert @board.all_cells_empty?(coordinates_1)
-    assert @board.all_cells_empty?(coordinates_2)
+    refute @board.all_cells_empty?(coordinates_1)
+    refute @board.all_cells_empty?(coordinates_2)
   end
 
   def test_valid_placement_for_ship
@@ -126,8 +128,41 @@ class BoardTest < Minitest::Test
   end
 
   def test_place_ship
-    skip
+    coordinates_1 = [:A1, :A2, :A3]
+    coordinates_2 = [:B1, :B2]
+    @board.place(@cruiser, coordinates_1)
+    @board.place(@submarine, coordinates_2)
+    sailboat = Ship.new("Sailboat", 2)
+    kayak = Ship.new("Kayak", 2)
 
+    assert @board.cells[:A1].ship == @cruiser
+    assert @board.cells[:A2].ship == @cruiser
+    assert @board.cells[:A3].ship == @cruiser
+    assert @board.cells[:B1].ship == @submarine
+    assert @board.cells[:B2].ship == @submarine
+    refute @board.cells[:B3].ship != nil
+    refute @board.valid_placement?(@submarine, [:A1, :A2])
+    refute @board.valid_placement?(kayak, [:A3, :B3])
+    assert @board.valid_placement?(sailboat, [:C3, :C4])
   end
+
+  def test_board_render
+    @board.render
+    assert_equal "  1 2 3 4 \nA . . . . \nB . . . . \nC . . . . \nD . . . . \n", @board.render
+
+    coordinates_1 = [:A1, :A2, :A3]
+    coordinates_2 = [:B1, :B2]
+    @board.place(@cruiser, coordinates_1)
+    @board.place(@submarine, coordinates_2)
+    @board.render
+
+        assert_equal "  1 2 3 4 \nA S S S . \nB S S . . \nC . . . . \nD . . . . \n", @board.render
+  end
+
+    #   1 2 3 4
+    # A . . . .
+    # B . . . .
+    # C . . . .
+    # D . . . .
 
 end
