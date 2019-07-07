@@ -59,7 +59,7 @@ class CellTest < Minitest::Test
     assert_equal ".", @cell.render
 
     cell = Cell.new("C4")
-   cell.fire_upon
+    cell.fire_upon
 
     assert_equal "M", cell.render
 
