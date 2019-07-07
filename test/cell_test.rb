@@ -35,12 +35,12 @@ class CellTest < Minitest::Test
   def test_it_can_be_fired_on
     @cell.place_ship(@ship)
 
-    assert_equal false, @cell.fired_upon?
+    refute @cell.fired_upon?
 
     @cell.fire_upon
 
     assert_equal 2, @cell.ship.health
-    assert_equal true, @cell.fired_upon?
+    assert @cell.fired_upon?
   end
 
   def test_shows_ship_with_s
@@ -62,11 +62,6 @@ class CellTest < Minitest::Test
     cell.fire_upon
 
     assert_equal "M", cell.render
-
-    @cell.place_ship(@ship)
-
-    assert_equal "S", @cell.render(true)
-    assert_equal ".", @cell.render
 
     @cell.fire_upon
 

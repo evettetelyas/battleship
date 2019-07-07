@@ -22,11 +22,18 @@ class Board
   end
 
   def valid_placement?(ship, coordinates)
-    return false unless valid_multiple_coordinates(coordinates) && all_cells_empty?(coordinates)
-
-    return true if all_letters_same?(coordinates) && numbers_sequential?(coordinates) && ship.length == coordinates.count
-
-    return true if all_letters_uniq?(coordinates) && all_numbers_same?(coordinates) && letters_sequential?(coordinates) && ship.length == coordinates.count
+    if !valid_multiple_coordinates(coordinates)
+      return false
+    elsif
+      !all_cells_empty?(coordinates)
+      return false
+    elsif
+      all_letters_same?(coordinates) && numbers_sequential?(coordinates) && ship.length == coordinates.count
+      return true
+    elsif
+      all_letters_uniq?(coordinates) && all_numbers_same?(coordinates) && letters_sequential?(coordinates) && ship.length == coordinates.count
+      return true
+    end
   end
 
   def all_letters_same?(coordinates)
@@ -122,24 +129,4 @@ class Board
 
     "D #{@cells[:D1].render} #{@cells[:D2].render} #{@cells[:D3].render} #{@cells[:D4].render} \n"
   end
-
-  def place_comp_ship(ship)
-    comp_placement = []
-     until valid_placement?(ship, comp_placement)
-       comp_placement = @cells.keys.sample(ship.length)
-     end
-      place(ship, comp_placement)
-  end
-
-  def place_player_ship(ship)
-    player_placement = []
-    until valid_placement?(ship, player_placement)
-      puts "Those are invalid coordinates. Please try again:"
-      print "> "
-    end
-    place(ship, player_placement)
-  end
-
-
-
 end
