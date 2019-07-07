@@ -54,6 +54,14 @@ class BoardTest < Minitest::Test
     coordinates_1 = [:A1, :A2, :A3]
 
     assert @board.valid_multiple_coordinates(coordinates_1)
+
+    coordinates_2 = [:A1, :A2, :A6]
+
+    refute @board.valid_multiple_coordinates(coordinates_2)
+
+    coordinates_3 = [:A1, :A2, :F3]
+
+    refute @board.valid_multiple_coordinates(coordinates_3)
   end
 
   def test_all_cells_empty?

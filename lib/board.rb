@@ -10,7 +10,7 @@ class Board
   end
 
   def valid_multiple_coordinates(coordinates)
-    coordinates.each do |coordinate|
+    coordinates.all? do |coordinate|
       @cells.keys.include?(coordinate)
     end
   end
@@ -129,4 +129,5 @@ class Board
 
     "D #{@cells[:D1].render} #{@cells[:D2].render} #{@cells[:D3].render} #{@cells[:D4].render} \n"
   end
+
 end
