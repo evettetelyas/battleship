@@ -89,6 +89,14 @@ class Board
     coordinates.map {|coordinate| @cells[coordinate].place_ship(ship)}
   end
 
+  def place_comp_ship(ship)
+    comp_placement = []
+    until valid_placement?(ship, comp_placement)
+      comp_placement = @cells.keys.sample(ship.length)
+    end
+    place(ship, comp_placement)
+  end
+
   def render(show = false)
     @show = show
     if @show == false
@@ -111,6 +119,17 @@ class Board
       "D #{@cells[:D1].render(true)} #{@cells[:D2].render(true)} #{@cells[:D3].render(true)} #{@cells[:D4].render(true)} \n"
     end
   end
+
+
+
+  # def place_player_ship(ship)
+  #   player_placement = []
+  #   until valid_placement?(ship, player_placement)
+  #     puts "Those are invalid coordinates. Please try again:"
+  #     print "> "
+  #   end
+  #   place(ship, player_placement)
+  # end
     # split_coordinates = @cells.keys.map {|coordinate|
     #     coordinate.to_s.chars}
     #

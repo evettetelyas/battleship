@@ -9,12 +9,12 @@ def initialize(comp_board, player_board)
 end
 
 def start
-  puts "Welcome to BATTLESHIP"
-  puts "Enter p to play. Enter q to quit"
-  print "> "
 
-  answer = gets.chomp.downcase
+    puts "Welcome to BATTLESHIP"
+    puts "Enter p to play. Enter q to quit"
+    print "> "
 
+    answer = gets.chomp.downcase
   if answer == "q"
     puts "Goodbye!"
   elsif answer == "p"
@@ -22,11 +22,11 @@ def start
 end
 
 def place_all_comp_ships
-  comp_ships.keys.each {|key| @comp_board.place_comp_ship(@comp_ships[key])}
+  @comp_ships.keys.each {|key| @comp_board.place_comp_ship(@comp_ships[key])}
 end
 
 def place_player_cruiser
-  puts "I have laid out my ships on the grid. You now need to lay your two ships. The Cruiser is three units long, and the Submarine is two uits long."
+  puts "I have laid out my ships on the grid. You now need to lay your two ships. The Cruiser is three units long, and the Submarine is two units long."
   puts @player_board.render
   puts "Enter the squares for your Cruiser (3 spaces)"
   print "> "
@@ -38,7 +38,7 @@ def place_player_cruiser
     coordinates = (gets.chomp.upcase.split(" ")).map {|cell| cell.to_sym}
   end
   @player_board.place(@player_ships[:cruiser], coordinates)
-  puts @player_board.render
+  puts @player_board.render(true)
 end
 
 def place_player_submarine

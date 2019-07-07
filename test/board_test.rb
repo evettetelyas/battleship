@@ -163,6 +163,7 @@ class BoardTest < Minitest::Test
     assert @board.valid_placement?(kayak, [:A4, :B4])
     @board.place(yacht, [:A4, :B4])
     assert @board.cells[:A4].ship == @board.cells[:B4].ship
+    refute @board.valid_placement?(sailboat, [:A4, :B4])
   end
 
   def test_board_render

@@ -45,30 +45,40 @@ class GameTest < Minitest::Test
               D3: Cell.new(:D3),
               D4: Cell.new(:D4)
                     }
-  @computer_board = Board.new(@computer_cells)
-  @player_board = Board.new(@player_cells)
-  @computer_cruiser = Ship.new("Cruiser", 3)
-  @player_cruiser = Ship.new("Cruiser", 3)
-  @computer_submarine = Ship.new("Submarine", 2)
-  @player_submarine = Ship.new("Submarine", 2)
-  @game = Game.new(@computer_board, @player_board)
-end
+    @computer_board = Board.new(@computer_cells)
+    @player_board = Board.new(@player_cells)
+    @computer_cruiser = Ship.new("Cruiser", 3)
+    @player_cruiser = Ship.new("Cruiser", 3)
+    @computer_submarine = Ship.new("Submarine", 2)
+    @player_submarine = Ship.new("Submarine", 2)
+    @game = Game.new(@computer_board, @player_board)
+  end
 
 
-def test_game_exist
-  assert_instance_of Game, @game
-end
+  def test_game_exist
+    assert_instance_of Game, @game
+  end
 
-def test_access_boards
-  assert_equal @computer_board, @game.comp_board
-  assert_equal @player_board, @game.player_board
-end
+  def test_access_boards
+    assert_equal @computer_board, @game.comp_board
+    assert_equal @player_board, @game.player_board
+  end
 
-def test_start_p
+  def test_start_p
 
-  assert_nil @game.start
-end
+    assert_nil @game.start
+  end
 
+  def test_can_place_computer_ships
+    assert @computer_board.all_cells_empty?([:A1, :A2, :A3, :A4, :B1, :B2, :B3, :B4, :C1, :C2, :C3, :C4,:D1, :D2, :D3, :D4])
 
+    @game.place_all_comp_ships
+
+    refute @computer_board.all_cells_empty?([:A1, :A2, :A3, :A4, :B1, :B2, :B3, :B4, :C1, :C2, :C3, :C4,:D1, :D2, :D3, :D4])
+  end
+
+  def test_place_player_ships
+    @game.place_player_cruiser
+  end
 
 end
