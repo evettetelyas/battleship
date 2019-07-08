@@ -3,7 +3,7 @@ require 'minitest/pride'
 require './lib/ship'
 require './lib/cell'
 require './lib/board'
-require './lib/playgame'
+require './lib/game'
 require 'pry'
 
   @computer_cells = {

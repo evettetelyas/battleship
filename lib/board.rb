@@ -10,7 +10,7 @@ class Board
   end
 
   def valid_multiple_coordinates(coordinates)
-    coordinates.each do |coordinate|
+    coordinates.all? do |coordinate|
       @cells.keys.include?(coordinate)
     end
   end
@@ -22,11 +22,18 @@ class Board
   end
 
   def valid_placement?(ship, coordinates)
-    return false unless valid_multiple_coordinates(coordinates) && all_cells_empty?(coordinates)
-
-    return true if all_letters_same?(coordinates) && numbers_sequential?(coordinates) && ship.length == coordinates.count
-
-    return true if all_letters_uniq?(coordinates) && all_numbers_same?(coordinates) && letters_sequential?(coordinates) && ship.length == coordinates.count
+    if !valid_multiple_coordinates(coordinates)
+      return false
+    elsif
+      !all_cells_empty?(coordinates)
+      return false
+    elsif
+      all_letters_same?(coordinates) && numbers_sequential?(coordinates) && ship.length == coordinates.count
+      return true
+    elsif
+      all_letters_uniq?(coordinates) && all_numbers_same?(coordinates) && letters_sequential?(coordinates) && ship.length == coordinates.count
+      return true
+    end
   end
 
   def all_letters_same?(coordinates)
@@ -82,7 +89,47 @@ class Board
     coordinates.map {|coordinate| @cells[coordinate].place_ship(ship)}
   end
 
-  def render
+  def place_comp_ship(ship)
+    comp_placement = []
+    until valid_placement?(ship, comp_placement)
+      comp_placement = @cells.keys.sample(ship.length)
+    end
+    place(ship, comp_placement)
+  end
+
+  def render(show = false)
+    @show = show
+    if @show == false
+      return "  1 2 3 4 \n" +
+      "A #{@cells[:A1].render} #{@cells[:A2].render} #{@cells[:A3].render} #{@cells[:A4].render} \n" +
+
+      "B #{@cells[:B1].render} #{@cells[:B2].render} #{@cells[:B3].render} #{@cells[:B4].render} \n" +
+
+      "C #{@cells[:C1].render} #{@cells[:C2].render} #{@cells[:C3].render} #{@cells[:C4].render} \n" +
+
+      "D #{@cells[:D1].render} #{@cells[:D2].render} #{@cells[:D3].render} #{@cells[:D4].render} \n"
+    elsif @show == true
+      return "  1 2 3 4 \n" +
+      "A #{@cells[:A1].render(true)} #{@cells[:A2].render(true)} #{@cells[:A3].render(true)} #{@cells[:A4].render(true)} \n" +
+
+      "B #{@cells[:B1].render(true)} #{@cells[:B2].render(true)} #{@cells[:B3].render(true)} #{@cells[:B4].render(true)} \n" +
+
+      "C #{@cells[:C1].render(true)} #{@cells[:C2].render(true)} #{@cells[:C3].render(true)} #{@cells[:C4].render(true)} \n" +
+
+      "D #{@cells[:D1].render(true)} #{@cells[:D2].render(true)} #{@cells[:D3].render(true)} #{@cells[:D4].render(true)} \n"
+    end
+  end
+
+
+
+  # def place_player_ship(ship)
+  #   player_placement = []
+  #   until valid_placement?(ship, player_placement)
+  #     puts "Those are invalid coordinates. Please try again:"
+  #     print "> "
+  #   end
+  #   place(ship, player_placement)
+  # end
     # split_coordinates = @cells.keys.map {|coordinate|
     #     coordinate.to_s.chars}
     #
@@ -112,34 +159,5 @@ class Board
     #
     # d_spaces = id_strings.select {|id| id.include?("D")}
     # d_spaces_symbols = d_spaces.map {|id| id.to_sym}
-
-    return "  1 2 3 4 \n" +
-    "A #{@cells[:A1].render} #{@cells[:A2].render} #{@cells[:A3].render} #{@cells[:A4].render} \n" +
-
-    "B #{@cells[:B1].render} #{@cells[:B2].render} #{@cells[:B3].render} #{@cells[:B4].render} \n" +
-
-    "C #{@cells[:C1].render} #{@cells[:C2].render} #{@cells[:C3].render} #{@cells[:C4].render} \n" +
-
-    "D #{@cells[:D1].render} #{@cells[:D2].render} #{@cells[:D3].render} #{@cells[:D4].render} \n"
-  end
-
-  def place_comp_ship(ship)
-    comp_placement = []
-     until valid_placement?(ship, comp_placement)
-       comp_placement = @cells.keys.sample(ship.length)
-     end
-      place(ship, comp_placement)
-  end
-
-  def place_player_ship(ship)
-    player_placement = []
-    until valid_placement?(ship, player_placement)
-      puts "Those are invalid coordinates. Please try again:"
-      print "> "
-    end
-    place(ship, player_placement)
-  end
-
-
 
 end
