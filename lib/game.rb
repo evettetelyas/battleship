@@ -1,3 +1,5 @@
+require 'colorize'
+
 class Game
   attr_reader :comp_board, :player_board, :comp_ships, :player_ships
 
@@ -108,12 +110,10 @@ end
 
 def final_results
   if @comp_ships.values.all? {|ship| ship.sunk?}
-    puts "\n\nYou won!"
+    puts "\n\nYou won!".colorize(:light_blue)
   elsif @player_ships.values.all? {|ship| ship.sunk?}
-    puts "\n\nI won!"
+    puts "\n\nI won!".colorize(:light_blue)
   end
-
 end
-
 
 end

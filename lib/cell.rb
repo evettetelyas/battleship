@@ -1,3 +1,4 @@
+require 'colorize'
 class Cell
   attr_reader :coordinate, :ship, :fired_upon, :render
 
@@ -37,18 +38,18 @@ class Cell
     @show = show
     if !fired_upon && !empty?
       if @show == true
-        return "S"
+        return "S".colorize(:light_blue)
       else
-        return "."
+        return ".".colorize(:light_blue)
       end
     elsif !fired_upon && empty?
-      return "."
+      return ".".colorize(:light_blue)
     elsif fired_upon? && empty?
-      return "M"
+      return "M".colorize(:light_blue)
     elsif fired_upon? && !empty? && !@ship.sunk?
-      return "H"
+      return "H".colorize(:red)
     elsif fired_upon? && @ship.sunk?
-      return "X"
+      return "X".colorize(:red ).colorize(:background => :blue)
     end
   end
 
