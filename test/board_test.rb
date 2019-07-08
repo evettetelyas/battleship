@@ -154,7 +154,7 @@ class BoardTest < Minitest::Test
     coordinates_2 = [:B1, :B2]
     @board.place(@cruiser, coordinates_1)
     @board.place(@submarine, coordinates_2)
-    @board.render
+    @board.render(true)
 
         assert_equal "  1 2 3 4 \nA S S S . \nB S S . . \nC . . . . \nD . . . . \n", @board.render
   end

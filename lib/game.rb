@@ -55,4 +55,14 @@ def place_player_submarine
   puts @player_board.render
 end
 
+def turn
+    puts "=============COMPUTER BOARD============="
+    puts @comp_board.render
+    puts "=============PLAYER BOARD============="
+    puts @player_board.render(true)
+
+    puts "\nEnter the coordinate for your shot"
+    puts "> "
+  end
+
 end
