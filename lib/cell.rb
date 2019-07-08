@@ -1,12 +1,13 @@
 require 'colorize'
 class Cell
-  attr_reader :coordinate, :ship, :fired_upon, :render
+  attr_reader :coordinate, :ship, :fired_upon, :render, :number_of_shots
 
   def initialize(coordinate, ship = nil, fired_upon = false, render = "." )
     @coordinate = coordinate
     @ship = ship
     @fired_upon = fired_upon
     @render = render
+    @number_of_shots = 0
   end
 
   def empty?
@@ -28,9 +29,11 @@ class Cell
   def fire_upon
     if !empty?
       @ship.hit
+      @number_of_shots += 1
       @fired_upon = true
     else
       @fired_upon = true
+      @number_of_shots += 1
     end
   end
 

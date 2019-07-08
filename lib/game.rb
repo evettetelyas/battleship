@@ -101,9 +101,21 @@ def turn
       answer = gets.chomp.upcase.to_sym
     end
 
+    until @comp_board.cells[answer].number_of_shots < 1
+      puts "You have already fired on #{answer}. Try again:"
+      print "> "
+      answer = gets.chomp.upcase.to_sym
+    end
+
     @comp_board.cells[answer].fire_upon
+
     random_hit = @player_board.cells.keys.sample
-    @player_board.cells[random_hit].fire_upon
+
+    # until @player_board.cells[random_hit].number_of_shots < 1
+    #   random_hit = @player_board.cells.keys.sample
+    # end
+
+      @player_board.cells[random_hit].fire_upon
 
     puts "\n\n\nYour shot on #{answer.upcase.to_s} #{@comp_board.cells[answer].render_output}"
     puts "My shot on #{random_hit.upcase.to_s} #{@player_board.cells[random_hit].render_output}"
