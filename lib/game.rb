@@ -70,19 +70,6 @@ class Game
     turn
   end
 
-  # def turn
-  #   puts "=" * 12 + "COMPUTER BOARD" + "=" * 12
-  #   puts @comp_board.render
-  #   puts "=" * 12 + "PLAYER BOARD" + "=" * 12
-  #   puts @player_board.render(true)
-  #
-  #   puts "What space would you like to fire on?"
-  #   puts " >"
-  #
-  #   answer = gets.chomp.upcase.to_sym
-  #   @comp_board.cells[answer].fire_upon
-  # end
-
   def all_ships_sunk?
     @comp_ships.values.all? {|ship| ship.sunk?} || @player_ships.values.all? {|ship| ship.sunk?}
   end
@@ -104,6 +91,12 @@ def turn
 
     until @comp_board.valid_coordinate(answer)
       puts "That is not a valid coordinate, please try again:"
+      print "> "
+      answer = gets.chomp.upcase.to_sym
+    end
+
+    until @comp_board.cells[answer].number_of_shots < 1
+      puts "You have already fired on #{answer}. Try again:"
       print "> "
       answer = gets.chomp.upcase.to_sym
     end
@@ -143,7 +136,6 @@ def final_results
     puts "\n\n\u{1F3C6 1F3C6}I won!\u{1F3C6 1F3C6}\n\n".colorize(:magenta)
   end
 
-  start
 end
-
+  start
 end
