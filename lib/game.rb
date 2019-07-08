@@ -1,3 +1,5 @@
+require 'colorize'
+
 class Game
   attr_reader :comp_board, :player_board, :comp_ships, :player_ships
 
@@ -15,13 +17,19 @@ class Game
       print "> "
 
       answer = gets.chomp.downcase
-    if answer == "q"
-      puts "Goodbye!"
-      exit
-    elsif answer == "p"
-      place_all_comp_ships
+      until answer == "p" || answer == "q"
+          puts "that's not valid, please try again!"
+          puts "Enter p to play. Enter q to quit"
+          print "> "
+          answer = gets.chomp.downcase
+        end
+      if answer == "p"
+        place_all_comp_ships
+      elsif answer == "q"
+        puts "Goodbye!"
+        exit
+      end
     end
-  end
 
   def place_all_comp_ships
     @comp_ships.keys.each {|key| @comp_board.place_comp_ship(@comp_ships[key])}
@@ -108,12 +116,10 @@ end
 
 def final_results
   if @comp_ships.values.all? {|ship| ship.sunk?}
-    puts "\n\nYou won!"
+    puts "\n\nYou won!".colorize(:magenta)
   elsif @player_ships.values.all? {|ship| ship.sunk?}
-    puts "\n\nI won!"
+    puts "\n\nI won!".colorize(:magenta)
   end
-
 end
-
 
 end
