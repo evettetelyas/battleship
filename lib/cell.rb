@@ -49,7 +49,7 @@ class Cell
     elsif fired_upon? && !empty? && !@ship.sunk?
       return "H".colorize(:red)
     elsif fired_upon? && @ship.sunk?
-      return "X".colorize(:red ).colorize(:background => :blue)
+      return "X".colorize(:black ).colorize(:background => :red)
     end
   end
 
