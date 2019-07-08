@@ -29,10 +29,11 @@ class Game
         puts "Goodbye!"
         exit
       end
-    end
+  end
 
   def place_all_comp_ships
     @comp_ships.keys.each {|key| @comp_board.place_comp_ship(@comp_ships[key])}
+    place_player_cruiser
   end
 
   def place_player_cruiser
@@ -49,6 +50,8 @@ class Game
     end
     @player_board.place(@player_ships[:cruiser], coordinates)
     puts @player_board.render(true)
+
+    place_player_submarine
   end
 
   def place_player_submarine
@@ -63,6 +66,8 @@ class Game
     end
     @player_board.place(@player_ships[:submarine], coordinates)
     puts @player_board.render(true)
+
+    turn
   end
 
   # def turn
@@ -109,29 +114,40 @@ def turn
 
     @comp_board.cells[answer].fire_upon
 
-    random_hit = @player_board.cells.keys.sample
 
+    # random_hit = @player_board.cells.keys.sample
     # until @player_board.cells[random_hit].number_of_shots < 1
     #   random_hit = @player_board.cells.keys.sample
     # end
 
-      @player_board.cells[random_hit].fire_upon
+    random_hit_ary = []
+    random_hit_ary = @player_board.cells.keys.select {|cell| @player_board.cells[cell].number_of_shots < 1}
+
+    @random_hit = random_hit_ary.sample
+
+    @player_board.cells[@random_hit].fire_upon
 
     puts "\n\n\nYour shot on #{answer.upcase.to_s} #{@comp_board.cells[answer].render_output}"
-    puts "My shot on #{random_hit.upcase.to_s} #{@player_board.cells[random_hit].render_output}"
+    puts "My shot on #{@random_hit.upcase.to_s} #{@player_board.cells[@random_hit].render_output}"
   end
+
+
   puts "=============FINAL COMPUTER BOARD============="
   puts @comp_board.render
   puts "=============FINAL PLAYER BOARD============="
   puts @player_board.render(true)
+
+  final_results
 end
 
 def final_results
   if @comp_ships.values.all? {|ship| ship.sunk?}
-    puts "\n\nYou won!".colorize(:magenta)
+    puts "\n\n\u{1F3C6 1F3C6}You won!\u{1F3C6 1F3C6}\n\n".colorize(:magenta)
   elsif @player_ships.values.all? {|ship| ship.sunk?}
-    puts "\n\nI won!".colorize(:magenta)
+    puts "\n\n\u{1F3C6 1F3C6}I won!\u{1F3C6 1F3C6}\n\n".colorize(:magenta)
   end
+
+  start
 end
 
 end
