@@ -1,3 +1,5 @@
+loop do
+
 require './lib/ship'
 require './lib/cell'
 require './lib/board'
@@ -48,5 +50,6 @@ require 'pry'
 @player_submarine = Ship.new("Submarine", 2)
 @game = Game.new(@computer_board, @player_board)
 
-
 @game.start
+
+end
