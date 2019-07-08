@@ -68,15 +68,35 @@ class Game
   #   @comp_board.cells[answer].fire_upon
   # end
 
+  def all_ships_sunk?
+    @comp_ships.values.all? {|ship| ship.sunk?} || @player_ships.values.all? {|ship| ship.sunk?}
+  end
+
 
 def turn
+  until all_ships_sunk?
     puts "=============COMPUTER BOARD============="
     puts @comp_board.render
     puts "=============PLAYER BOARD============="
     puts @player_board.render(true)
 
     puts "\nEnter the coordinate for your shot"
-    puts "> "
+    print "> "
+
+    answer = gets.chomp.upcase.to_sym
+
+    until @comp_board.valid_coordinate(answer)
+      puts "That is not a valid coordinate, please try again:"
+      print "> "
+      answer = gets.chomp.upcase.to_sym
+    end
+    @comp_board.cells[answer].fire_upon
+    random_hit = @player_board.cells.keys.sample
+    @player_board.cells[random_hit].fire_upon
+
+    puts "Your shot on #{answer.upcase.to_s} #{@comp_board.cells[answer].render_output}"
+    puts "My shot on #{random_hit.upcase.to_s} #{@player_board.cells[random_hit].render_output}"
   end
+end
 
 end

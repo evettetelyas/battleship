@@ -5,6 +5,9 @@ class Board
     @cells = cells
   end
 
+  def valid_coordinate(coordinate)
+    @cells.keys.include?(coordinate)
+  end
 
   def valid_multiple_coordinates(coordinates)
     coordinates.all? do |coordinate|
