@@ -95,8 +95,22 @@ def turn
     @player_board.cells[random_hit].fire_upon
 
     puts "Your shot on #{answer.upcase.to_s} #{@comp_board.cells[answer].render_output}"
-    puts "My shot on #{random_hit.upcase.to_s} #{@player_board.cells[random_hit].render_output}"
+    puts "My shot on #{random_hit.upcase.to_s} #{@player_board.cells[random_hit].render_output}\n\n"
   end
+  puts "=============FINAL COMPUTER BOARD============="
+  puts @comp_board.render
+  puts "=============FINAL PLAYER BOARD============="
+  puts @player_board.render(true)
 end
+
+def final_results
+  if @comp_ships.values.all? {|ship| ship.sunk?}
+    puts "\n\nYou won!"
+  elsif @player_ships.values.all? {|ship| ship.sunk?}
+    puts "\n\nI won!"
+  end
+
+end
+
 
 end

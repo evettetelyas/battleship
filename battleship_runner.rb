@@ -54,3 +54,4 @@ require 'pry'
 @game.place_player_cruiser
 @game.place_player_submarine
 @game.turn
+@game.final_results
