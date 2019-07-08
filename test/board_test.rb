@@ -26,9 +26,9 @@ class BoardTest < Minitest::Test
               D3: Cell.new(:D3),
               D4: Cell.new(:D4)
             }
-  @board = Board.new(@cells)
-  @cruiser = Ship.new("Cruiser", 3)
-  @submarine = Ship.new("Submarine", 2)
+            @board = Board.new(@cells)
+            @cruiser = Ship.new("Cruiser", 3)
+            @submarine = Ship.new("Submarine", 2)
   end
 
   def test_board_exist
@@ -174,7 +174,7 @@ class BoardTest < Minitest::Test
     coordinates_2 = [:C4, :D4]
     @board.place(@cruiser, coordinates_1)
     @board.place(@submarine, coordinates_2)
-    # @board.render
+    @board.render(true)
 
         assert_equal "  1 2 3 4 \nA S S S . \nB . . . . \nC . . . S \nD . . . S \n", @board.render(true)
   end

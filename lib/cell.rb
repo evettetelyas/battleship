@@ -52,5 +52,14 @@ class Cell
     end
   end
 
+  def render_output
+    if fired_upon? && empty?
+      return "was a miss."
+    elsif fired_upon? && !empty? && !@ship.sunk?
+      return "was a hit!"
+    elsif fired_upon? && !empty? && @ship.sunk?
+      return "sunk the ship!"
+    end
+  end
 
  end
