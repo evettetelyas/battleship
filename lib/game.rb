@@ -29,10 +29,11 @@ class Game
         puts "Goodbye!"
         exit
       end
-    end
+  end
 
   def place_all_comp_ships
     @comp_ships.keys.each {|key| @comp_board.place_comp_ship(@comp_ships[key])}
+    place_player_cruiser
   end
 
   def place_player_cruiser
@@ -49,6 +50,8 @@ class Game
     end
     @player_board.place(@player_ships[:cruiser], coordinates)
     puts @player_board.render(true)
+
+    place_player_submarine
   end
 
   def place_player_submarine
@@ -63,6 +66,8 @@ class Game
     end
     @player_board.place(@player_ships[:submarine], coordinates)
     puts @player_board.render(true)
+
+    turn
   end
 
   # def turn
@@ -126,11 +131,13 @@ def turn
     puts "My shot on #{@random_hit.upcase.to_s} #{@player_board.cells[@random_hit].render_output}"
   end
 
-  
+
   puts "=============FINAL COMPUTER BOARD============="
   puts @comp_board.render
   puts "=============FINAL PLAYER BOARD============="
   puts @player_board.render(true)
+
+  final_results
 end
 
 def final_results
