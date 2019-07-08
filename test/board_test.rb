@@ -54,14 +54,26 @@ class BoardTest < Minitest::Test
     coordinates_1 = [:A1, :A2, :A3]
 
     assert @board.valid_multiple_coordinates(coordinates_1)
+
+    coordinates_2 = [:A1, :A2, :A6]
+
+    refute @board.valid_multiple_coordinates(coordinates_2)
+
+    coordinates_3 = [:A1, :A2, :F3]
+
+    refute @board.valid_multiple_coordinates(coordinates_3)
   end
 
   def test_all_cells_empty?
+    coordinates_3 = [:C1, :C2, :C3]
     coordinates_1 = [:A1, :A2, :A3]
-    coordinates_2 = [:A1, :B1, :C1]
+    coordinates_2 = [:B1, :B2]
+    @board.place(@cruiser, coordinates_1)
+    @board.place(@submarine, coordinates_2)
 
-    assert @board.all_cells_empty?(coordinates_1)
-    assert @board.all_cells_empty?(coordinates_2)
+    assert @board.all_cells_empty?(coordinates_3)
+    refute @board.all_cells_empty?(coordinates_1)
+    refute @board.all_cells_empty?(coordinates_2)
   end
 
   def test_valid_placement_for_ship
@@ -74,6 +86,9 @@ class BoardTest < Minitest::Test
     refute @board.valid_placement?(@submarine, [:C2, :D3])
     assert @board.valid_placement?(@cruiser, [:B1, :C1, :D1])
     assert @board.valid_placement?(@submarine, [:A1, :A2])
+    assert @board.valid_placement?(@submarine, [:A1, :B1])
+    assert @board.valid_placement?(@cruiser, [:A3, :B3, :C3])
+    refute @board.valid_placement?(@cruiser, [:A2, :B3, :C3])
   end
 
   def test_all_letters_of_coordinates_same
@@ -90,6 +105,8 @@ class BoardTest < Minitest::Test
     assert @board.all_letters_uniq?(coordinates_1)
     coordinates_2 = [:A1, :B2, :B3, :D4]
     refute @board.all_letters_uniq?(coordinates_2)
+    coordinates_3 = [:A1, :C1, :D1]
+    assert @board.all_letters_uniq?(coordinates_3)
   end
 
   def test_all_numbers_are_same
@@ -126,8 +143,46 @@ class BoardTest < Minitest::Test
   end
 
   def test_place_ship
-    skip
+    coordinates_1 = [:A1, :A2, :A3]
+    coordinates_2 = [:B1, :B2]
+    @board.place(@cruiser, coordinates_1)
+    @board.place(@submarine, coordinates_2)
+    sailboat = Ship.new("Sailboat", 2)
+    kayak = Ship.new("Kayak", 2)
+    yacht = Ship.new("Yacht", 2)
 
+    assert @board.cells[:A1].ship == @cruiser
+    assert @board.cells[:A2].ship == @cruiser
+    assert @board.cells[:A3].ship == @cruiser
+    assert @board.cells[:B1].ship == @submarine
+    assert @board.cells[:B2].ship == @submarine
+    assert @board.cells[:B3].ship == nil
+    refute @board.valid_placement?(@submarine, [:A1, :A2])
+    refute @board.valid_placement?(kayak, [:A3, :B3])
+    assert @board.valid_placement?(sailboat, [:C3, :C4])
+    assert @board.valid_placement?(kayak, [:A4, :B4])
+    @board.place(yacht, [:A4, :B4])
+    assert @board.cells[:A4].ship == @board.cells[:B4].ship
+    refute @board.valid_placement?(sailboat, [:A4, :B4])
   end
+
+  def test_board_render
+    # @board.render
+    assert_equal "  1 2 3 4 \nA . . . . \nB . . . . \nC . . . . \nD . . . . \n", @board.render
+
+    coordinates_1 = [:A1, :A2, :A3]
+    coordinates_2 = [:C4, :D4]
+    @board.place(@cruiser, coordinates_1)
+    @board.place(@submarine, coordinates_2)
+    # @board.render
+
+        assert_equal "  1 2 3 4 \nA S S S . \nB . . . . \nC . . . S \nD . . . S \n", @board.render(true)
+  end
+
+    #   1 2 3 4
+    # A . . . .
+    # B . . . .
+    # C . . . .
+    # D . . . .
 
 end
