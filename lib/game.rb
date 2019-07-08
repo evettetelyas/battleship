@@ -146,8 +146,6 @@ def final_results
   elsif @player_ships.values.all? {|ship| ship.sunk?}
     puts "\n\n\u{1F3C6 1F3C6}I won!\u{1F3C6 1F3C6}\n\n".colorize(:magenta)
   end
-
-  start
 end
 
 end

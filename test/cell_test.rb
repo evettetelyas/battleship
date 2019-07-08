@@ -47,28 +47,28 @@ class CellTest < Minitest::Test
     @cell.place_ship(@ship)
 
 
-    assert_equal "S", @cell.render(true)
+    assert_equal "🚢", @cell.render(true)
   end
 
   def test_render_works
-    assert_equal ".", @cell.render
+    assert_equal "🔵", @cell.render
 
     @cell.place_ship(@ship)
 
-    assert_equal "S", @cell.render(true)
-    assert_equal ".", @cell.render
+    assert_equal "🚢", @cell.render(true)
+    assert_equal "🔵", @cell.render
 
     cell = Cell.new("C4")
     cell.fire_upon
 
-    assert_equal "M", cell.render
+    assert_equal "🔷", cell.render
 
     @cell.fire_upon
 
-    assert_equal "H", @cell.render
+    assert_equal "💣", @cell.render
     assert_equal 2, @ship.health
 
     2.times {@cell.fire_upon}
-    assert_equal "X", @cell.render
+    assert_equal "💀", @cell.render
   end
 end
