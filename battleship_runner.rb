@@ -52,5 +52,6 @@ require 'pry'
 @game.start
 @game.place_player_cruiser
 @game.place_player_submarine
+binding.pry
 @game.turn
 @game.final_results
