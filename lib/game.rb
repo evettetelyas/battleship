@@ -55,4 +55,18 @@ class Game
     puts @player_board.render(true)
   end
 
+  # def turn
+  #   puts "=" * 12 + "COMPUTER BOARD" + "=" * 12
+  #   puts @comp_board.render
+  #   puts "=" * 12 + "PLAYER BOARD" + "=" * 12
+  #   puts @player_board.render(true)
+  #
+  #   puts "What space would you like to fire on?"
+  #   puts " >"
+  #
+  #   answer = gets.chomp.upcase.to_sym
+  #   @comp_board.cells[answer].fire_upon
+  # end
+
+
 end
