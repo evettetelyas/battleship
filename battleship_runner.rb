@@ -50,7 +50,6 @@ require 'pry'
 
 
 @game.start
-@game.place_all_comp_ships
 @game.place_player_cruiser
 @game.place_player_submarine
 @game.turn
