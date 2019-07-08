@@ -41,18 +41,24 @@ class Cell
     @show = show
     if !fired_upon && !empty?
       if @show == true
-        return "S".colorize(:light_blue)
+        # return "S".colorize(:light_blue)
+        return "\u{1F6A2}"
       else
-        return ".".colorize(:light_blue)
+        # return ".".colorize(:light_blue)
+        return "\u{1F535}"
       end
     elsif !fired_upon && empty?
-      return ".".colorize(:light_blue)
+      # return ".".colorize(:light_blue)
+      return "\u{1F535}"
     elsif fired_upon? && empty?
-      return "M".colorize(:light_blue)
+      # return "M".colorize(:light_blue)
+      return "\u{1F537}"
     elsif fired_upon? && !empty? && !@ship.sunk?
-      return "H".colorize(:red)
+      # return "H".colorize(:red)
+      return "\u{1F4A3}"
     elsif fired_upon? && @ship.sunk?
-      return "X".colorize(:black ).colorize(:background => :red)
+      # return "X".colorize(:black).colorize(:background => :red)
+      return "\u{1F480}"
     end
   end
 
