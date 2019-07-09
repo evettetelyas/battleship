@@ -55,7 +55,7 @@ class Cell
       return "\u{1F537}"
     elsif fired_upon? && !empty? && !@ship.sunk?
       # return "H".colorize(:red)
-      return "\u{1F4A3}"
+      return "\u{1F4A5}"
     elsif fired_upon? && @ship.sunk?
       # return "X".colorize(:black).colorize(:background => :red)
       return "\u{1F480}"

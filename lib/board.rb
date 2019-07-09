@@ -3,8 +3,8 @@ class Board
 
   def initialize(num_let = 4, num_num = 4)
     @cells = {}
-    @num_let = ("A".."Z").to_a[0..num_let-1]
-    @num_num = ("1".."100").to_a[0..num_num-1]
+    @num_let = ("A".."I").to_a[0..num_let-1]
+    @num_num = ("1".."9").to_a[0..num_num-1]
   end
 
   def make_cell_keys
@@ -119,35 +119,17 @@ class Board
   end
 
   def render(show = false)
-    @show = show
-    if @show == false
-      return "   " +
-      @num_num.map do |num|
-        num + "  "
-      end.join + "\n" +
+    return "   " +
+    @num_num.map do |num|
+      num + "  "
+    end.join + "\n" +
 
-      @num_let.map do |let|
-        let + @cells.keys.map do |key|
-          if key.to_s.include?(let)
-          " " + @cells[key].render
+    @num_let.map do |let|
+      let + @cells.keys.map do |key|
+        if key.to_s.include?(let)
+          " " + @cells[key].render(show)
         end
-        end.join + " \n"
-      end.join
-
-    elsif @show == true
-      return "   " +
-      @num_num.map do |num|
-        num + "  "
-      end.join + "\n" +
-
-      @num_let.map do |let|
-        let + @cells.keys.map do |key|
-          if key.to_s.include?(let)
-          " " + @cells[key].render(true)
-        end
-        end.join + " \n"
-      end.join
+      end.join + " \n"
+    end.join
   end
-end
-
 end

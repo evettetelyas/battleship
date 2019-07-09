@@ -1,35 +1,75 @@
+loop do
+
 require './lib/ship'
 require './lib/cell'
 require './lib/board'
 require './lib/game'
 require 'pry'
 
-# puts "Add the dimensions of your board:"
-#     print "Height: "
-#     @height = gets.chomp.to_i
-#     print "Width: "
-#     @width = gets.chomp.to_i
-#     if @height < 4 || @width < 4
-#       puts "Your board is too small. Both height and width must be at least 4 cells. Automatically set to 4x4 board."
-#         @height = 4
-#         @width = 4
-#       elsif @height > 9 || @width > 9
-#         puts "Your board is too big. Both height and width must be 9 cells or less. Automatically set to 9x9 board."
-#           @height = 9
-#           @width = 9
-#     end
-@height = 7
-@width = 7
+puts "\n\n\n\u{1F6A2 1F4A3 1F4A6}WELCOME TO BATTLESHIP\u{1F4A6 1F4A3 1F6A2}"
+  puts "Enter p to play. Enter q to quit"
+  print "> "
+    answer = gets.chomp.downcase
+    until answer == "p" || answer == "q"
+      puts "that's not valid, please try again!"
+      puts "Enter p to play. Enter q to quit"
+      print "> "
+      answer = gets.chomp.downcase
+    end
+    if answer == "q"
+      puts "Goodbye!"
+      exit
+    end
+
+    puts "Add the dimensions of your board:"
+    print "Height: "
+    @height = gets.chomp.to_i
+    print "Width: "
+    @width = gets.chomp.to_i
+    if @height < 4 || @width < 4
+      puts "\nBoth height and width must be at least 4 cells. Automatically set to 4x4 board."
+      @height = 4
+      @width = 4
+    elsif @height > 9 || @width > 9
+        puts "\nYour board is too big. Both height and width must be 9 cells or less. Automatically set to 9x9 board."
+          @height = 9
+          @width = 9
+        elsif @height.between?(4,9) && @width.between?(4,9)
+          puts "\n\nGreat! You are all set with a #{@height}x#{@width} board!"
+        else puts "\nThat's not a valid input, please try again:"
+          print "Height: "
+          @height = gets.chomp.to_i
+          print "Width: "
+          @width = gets.chomp.to_i
+        end
+
+        # puts "\n\nNow, let's set up your ships!\nThe computer will also have the same ships."
+        # puts "Name your first ship:"
+        # print "> "
+        # @ship_1_name = gets.chomp.capitalize
+        # puts "How many cells will #{@ship_1_name} take?"
+        # print "> "
+        # @ship_1_health = gets.chomp.to_i
+        #
+        # puts "Name your second ship:"
+        # print "> "
+        # @ship_2_name = gets.chomp.capitalize
+        # puts "How many cells will #{@ship_2_name} take?"
+        # print "> "
+        # @ship_2_health = gets.chomp.to_i
 
 @computer_board = Board.new(@height, @width)
 @player_board = Board.new(@height, @width)
 @computer_cruiser = Ship.new("Cruiser", 3)
 @player_cruiser = Ship.new("Cruiser", 3)
+# @player_ship_1 = Ship.new(@ship_1_name, @ship_1_health)
 @computer_submarine = Ship.new("Submarine", 2)
 @player_submarine = Ship.new("Submarine", 2)
+# @player_ship_2 = Ship.new("@ship_2_name", @ship_2_health)
 @game = Game.new(@computer_board, @player_board)
 
 @computer_board.make_cell_hash
 @player_board.make_cell_hash
-@game.open
-@game.start
+@game.place_all_comp_ships
+
+end
