@@ -1,21 +1,24 @@
 class Board
-  attr_reader :cells
+  attr_reader :cells, :num_let, :num_num
 
-  def initialize(cells)
-    @cells = cells
+  def initialize(num_let = 4, num_num = 4)
+    @cells = {}
+    @num_let = ("A".."Z").to_a[0..num_let-1]
+    @num_num = ("1".."100").to_a[0..num_num-1]
   end
 
-  def make_cell_coordinates(num_let, num_num)
+  def make_cell_keys
+    @num_let.map do |let|
+      @num_num.map do |num|
+        (let + num).to_sym
+      end
+    end.flatten
+  end
 
-    # @range_num = (1..@num_let)
-    # letters = %w[A B C D]
-    # numbers = %w[1 2 3 4]
-    #
-    # new_coord = letters.map do |letter|
-    #   numbers.map do |number|
-    #     (letter + number).to_sym
-    #   end
-    # end.flatten
+  def make_cell_hash
+    make_cell_keys.map do |key|
+      @cells[key] = Cell.new(key)
+    end
 
   end
 
