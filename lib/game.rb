@@ -1,34 +1,15 @@
 require 'colorize'
 
 class Game
-  attr_reader :comp_board, :player_board, :comp_ships, :player_ships
+  attr_reader :comp_board, :player_board, :comp_ships, :player_ships, :height, :width
 
   def initialize(comp_board, player_board)
     @comp_board = comp_board
     @player_board = player_board
     @comp_ships = {cruiser: Ship.new("Cruiser", 3), submarine: Ship.new("Submarine", 2)}
     @player_ships = {cruiser: Ship.new("Cruiser", 3), submarine: Ship.new("Submarine", 2)}
-  end
-
-  def start
-
-      puts "Welcome to BATTLESHIP"
-      puts "Enter p to play. Enter q to quit"
-      print "> "
-
-      answer = gets.chomp.downcase
-      until answer == "p" || answer == "q"
-          puts "that's not valid, please try again!"
-          puts "Enter p to play. Enter q to quit"
-          print "> "
-          answer = gets.chomp.downcase
-        end
-      if answer == "p"
-        place_all_comp_ships
-      elsif answer == "q"
-        puts "Goodbye!"
-        exit
-      end
+    @height = height
+    @width = width
   end
 
   def place_all_comp_ships
@@ -37,9 +18,9 @@ class Game
   end
 
   def place_player_cruiser
-    puts "I have laid out my ships on the grid. You now need to lay your two ships. The Cruiser is three units long, and the Submarine is two units long."
+    puts "\n\nI have laid out my ships on the grid. You now need to lay your two ships. The #{@player_ships[:cruiser].name} is #{@player_ships[:cruiser].health} units long, and the #{@player_ships[:submarine].name} is #{@player_ships[:submarine].health} units long."
     puts @player_board.render
-    puts "Enter the squares for your Cruiser (3 spaces)"
+    puts "\nEnter the squares for your #{@player_ships[:cruiser].name} (#{@player_ships[:cruiser].health} spaces)"
     print "> "
 
     coordinates = (gets.chomp.upcase.split(" ")).map {|cell| cell.to_sym}
@@ -55,7 +36,7 @@ class Game
   end
 
   def place_player_submarine
-    puts "Enter the squares for your Submarine (2 spaces)"
+    puts "Enter the squares for your #{@player_ships[:submarine].name} (#{@player_ships[:submarine].health} spaces)"
     print "> "
 
     coordinates = (gets.chomp.upcase.split(" ")).map {|cell| cell.to_sym}
@@ -70,19 +51,6 @@ class Game
     turn
   end
 
-  # def turn
-  #   puts "=" * 12 + "COMPUTER BOARD" + "=" * 12
-  #   puts @comp_board.render
-  #   puts "=" * 12 + "PLAYER BOARD" + "=" * 12
-  #   puts @player_board.render(true)
-  #
-  #   puts "What space would you like to fire on?"
-  #   puts " >"
-  #
-  #   answer = gets.chomp.upcase.to_sym
-  #   @comp_board.cells[answer].fire_upon
-  # end
-
   def all_ships_sunk?
     @comp_ships.values.all? {|ship| ship.sunk?} || @player_ships.values.all? {|ship| ship.sunk?}
   end
@@ -95,21 +63,22 @@ def turn
     puts "=============PLAYER BOARD============="
     puts @player_board.render(true)
 
-    puts "\nEnter the coordinate for your shot"
-    print "> "
+    answer = nil
 
-    answer = gets.chomp.upcase.to_sym
-
-    until @comp_board.valid_coordinate(answer)
-      puts "That is not a valid coordinate, please try again:"
+    ready_to_fire = false
+    while !ready_to_fire
+      puts "\nEnter the coordinate for your shot"
       print "> "
       answer = gets.chomp.upcase.to_sym
-    end
 
-    until @comp_board.cells[answer].number_of_shots < 1
-      puts "You have already fired on #{answer}. Try again:"
-      print "> "
-      answer = gets.chomp.upcase.to_sym
+      if !@comp_board.valid_coordinate(answer)
+        puts "That is not a valid coordinate, please try again:"
+
+      elsif @comp_board.cells[answer].number_of_shots >= 1
+        puts "You have already fired on #{answer}. Try again:"
+      else
+        ready_to_fire = true
+      end
     end
 
     @comp_board.cells[answer].fire_upon
