@@ -65,7 +65,7 @@ class CellTest < Minitest::Test
 
     @cell.fire_upon
 
-    assert_equal "💣", @cell.render
+    assert_equal "💥", @cell.render
     assert_equal 2, @ship.health
 
     2.times {@cell.fire_upon}
