@@ -5,6 +5,20 @@ class Board
     @cells = cells
   end
 
+  def make_cell_coordinates(num_let, num_num)
+
+    # @range_num = (1..@num_let)
+    # letters = %w[A B C D]
+    # numbers = %w[1 2 3 4]
+    #
+    # new_coord = letters.map do |letter|
+    #   numbers.map do |number|
+    #     (letter + number).to_sym
+    #   end
+    # end.flatten
+
+  end
+
   def valid_coordinate(coordinate)
     @cells.keys.include?(coordinate)
   end
@@ -34,6 +48,11 @@ class Board
       all_letters_uniq?(coordinates) && all_numbers_same?(coordinates) && letters_sequential?(coordinates) && ship.length == coordinates.count
       return true
     end
+  end
+
+  def split_coordinates(coordinates)
+    @split_coordinates = coordinates.map {|coordinate|
+        coordinate.to_s.chars}
   end
 
   def all_letters_same?(coordinates)
@@ -119,45 +138,5 @@ class Board
       "D #{@cells[:D1].render(true)} #{@cells[:D2].render(true)} #{@cells[:D3].render(true)} #{@cells[:D4].render(true)} \n"
     end
   end
-
-
-
-  # def place_player_ship(ship)
-  #   player_placement = []
-  #   until valid_placement?(ship, player_placement)
-  #     puts "Those are invalid coordinates. Please try again:"
-  #     print "> "
-  #   end
-  #   place(ship, player_placement)
-  # end
-    # split_coordinates = @cells.keys.map {|coordinate|
-    #     coordinate.to_s.chars}
-    #
-    # num_ary = split_coordinates.map {|c| c[1]}.uniq
-    # num_times = num_ary.sort.last.to_i
-    # # letter_ary = split_coordinates.map {|c| c[0]}.uniq
-    # id_strings = @cells.keys.collect {|symbol| symbol.to_s}
-    #
-    # render_output = "  "
-    #
-    # render_output += (num_ary.join(" ") + " \n") + "A "
-    #
-    # row_output = num_times.times do
-    #   @cells.each do |cell|
-    #     p @cells[].render
-    #   end
-    # end
-    #
-    # a_spaces = id_strings.select {|id| id.include?("A")}
-    # a_spaces_symbols = a_spaces.map {|id| id.to_sym}
-    #
-    # b_spaces = id_strings.select {|id| id.include?("B")}
-    # b_spaces_symbols = b_spaces.map {|id| id.to_sym}
-    #
-    # c_spaces = id_strings.select {|id| id.include?("C")}
-    # c_spaces_symbols = c_spaces.map {|id| id.to_sym}
-    #
-    # d_spaces = id_strings.select {|id| id.include?("D")}
-    # d_spaces_symbols = d_spaces.map {|id| id.to_sym}
 
 end
