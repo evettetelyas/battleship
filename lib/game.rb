@@ -1,35 +1,38 @@
 require 'colorize'
 
 class Game
-  attr_reader :comp_board, :player_board, :comp_ships, :player_ships
+  attr_reader :comp_board, :player_board, :comp_ships, :player_ships, :height, :width
 
   def initialize(comp_board, player_board)
     @comp_board = comp_board
     @player_board = player_board
     @comp_ships = {cruiser: Ship.new("Cruiser", 3), submarine: Ship.new("Submarine", 2)}
     @player_ships = {cruiser: Ship.new("Cruiser", 3), submarine: Ship.new("Submarine", 2)}
+    @height = height
+    @width = width
   end
 
-  def start
-
-      puts "Welcome to BATTLESHIP"
-      puts "Enter p to play. Enter q to quit"
-      print "> "
-
-      answer = gets.chomp.downcase
-      until answer == "p" || answer == "q"
-          puts "that's not valid, please try again!"
-          puts "Enter p to play. Enter q to quit"
-          print "> "
-          answer = gets.chomp.downcase
-        end
-      if answer == "p"
-        place_all_comp_ships
-      elsif answer == "q"
-        puts "Goodbye!"
-        exit
-      end
-  end
+  # def start
+  #
+  #     puts "\n\n\n\u{1F6A2 1F4A3 1F4A6}WELCOME TO BATTLESHIP\u{1F4A6 1F4A3 1F6A2}"
+  #     puts "Enter p to play. Enter q to quit"
+  #     print "> "
+  #
+  #     answer = gets.chomp.downcase
+  #     until answer == "p" || answer == "q"
+  #         puts "that's not valid, please try again!"
+  #         puts "Enter p to play. Enter q to quit"
+  #         print "> "
+  #         answer = gets.chomp.downcase
+  #       end
+  #     if answer == "p"
+  #       # set_size
+  #       place_all_comp_ships
+  #     elsif answer == "q"
+  #       puts "Goodbye!"
+  #       exit
+  #     end
+  # end
 
   def place_all_comp_ships
     @comp_ships.keys.each {|key| @comp_board.place_comp_ship(@comp_ships[key])}
@@ -110,7 +113,7 @@ def turn
       puts "You have already fired on #{answer}. Try again:"
       print "> "
       answer = gets.chomp.upcase.to_sym
-    end
+    end 
 
     @comp_board.cells[answer].fire_upon
 
