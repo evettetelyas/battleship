@@ -35,7 +35,7 @@ puts "\n\n\n\u{1F6A2 1F4A3 1F4A6}WELCOME TO BATTLESHIP\u{1F4A6 1F4A3 1F6A2}"
           @height = 9
           @width = 9
         elsif @height.between?(4,9) && @width.between?(4,9)
-          puts "\n\nGreat! You are all set with a #{@height}x#{@width} board!"
+          puts "\nGreat! You are all set with a #{@height}x#{@width} board!"
         else puts "\nThat's not a valid input, please try again:"
           print "Height: "
           @height = gets.chomp.to_i
@@ -43,30 +43,38 @@ puts "\n\n\n\u{1F6A2 1F4A3 1F4A6}WELCOME TO BATTLESHIP\u{1F4A6 1F4A3 1F6A2}"
           @width = gets.chomp.to_i
         end
 
-        # puts "\n\nNow, let's set up your ships!\nThe computer will also have the same ships."
-        # puts "Name your first ship:"
-        # print "> "
-        # @ship_1_name = gets.chomp.capitalize
-        # puts "How many cells will #{@ship_1_name} take?"
-        # print "> "
-        # @ship_1_health = gets.chomp.to_i
-        #
-        # puts "Name your second ship:"
-        # print "> "
-        # @ship_2_name = gets.chomp.capitalize
-        # puts "How many cells will #{@ship_2_name} take?"
-        # print "> "
-        # @ship_2_health = gets.chomp.to_i
+        puts "\n\nNow, let's set up the ships!"
+        puts "Name your first ship:"
+        print "> "
+        ship_1_name = gets.chomp.capitalize
+        puts "How many cells will #{ship_1_name} take?"
+        print "> "
+        ship_1_health = gets.chomp.to_i
+
+        puts "Name your second ship:"
+        print "> "
+        ship_2_name = gets.chomp.capitalize
+        puts "How many cells will #{ship_2_name} take?"
+        print "> "
+        ship_2_health = gets.chomp.to_i
+
+        puts "Name your third ship:"
+        print "> "
+        ship_3_name = gets.chomp.capitalize
+        puts "How many cells will #{ship_3_name} take?"
+        print "> "
+        ship_3_health = gets.chomp.to_i
 
 @computer_board = Board.new(@height, @width)
 @player_board = Board.new(@height, @width)
-@computer_cruiser = Ship.new("Cruiser", 3)
-@player_cruiser = Ship.new("Cruiser", 3)
-# @player_ship_1 = Ship.new(@ship_1_name, @ship_1_health)
-@computer_submarine = Ship.new("Submarine", 2)
-@player_submarine = Ship.new("Submarine", 2)
-# @player_ship_2 = Ship.new("@ship_2_name", @ship_2_health)
 @game = Game.new(@computer_board, @player_board)
+
+@game.player_ships[:ship_1] = Ship.new(ship_1_name, ship_1_health)
+@game.player_ships[:ship_2] = Ship.new(ship_2_name, ship_2_health)
+@game.player_ships[:ship_3] = Ship.new(ship_3_name, ship_3_health)
+@game.comp_ships[:ship_1] = Ship.new(ship_1_name, ship_1_health)
+@game.comp_ships[:ship_2] = Ship.new(ship_2_name, ship_2_health)
+@game.comp_ships[:ship_3] = Ship.new(ship_3_name, ship_3_health)
 
 @computer_board.make_cell_hash
 @player_board.make_cell_hash
