@@ -182,8 +182,10 @@ class BoardTest < Minitest::Test
 
   def test_board_render
     @board.make_cell_hash
+    # binding.pry
+
     # @board.render
-    assert_equal "   1  2  3  4 \nA 🔵 🔵 🔵 🔵 \nB 🔵 🔵 🔵 🔵 \nC 🔵 🔵 🔵 🔵 \nD 🔵 🔵 🔵 🔵 \n", @board.render
+    assert_equal "   1  2  3  4  \nA 🔵 🔵 🔵 🔵 \nB 🔵 🔵 🔵 🔵 \nC 🔵 🔵 🔵 🔵 \nD 🔵 🔵 🔵 🔵 \n", @board.render
 
     coordinates_1 = [:A1, :A2, :A3]
     coordinates_2 = [:C4, :D4]
@@ -191,7 +193,7 @@ class BoardTest < Minitest::Test
     @board.place(@submarine, coordinates_2)
     @board.render(true)
 
-        assert_equal "   1  2  3  4 \nA 🚢 🚢 🚢 🔵 \nB 🔵 🔵 🔵 🔵 \nC 🔵 🔵 🔵 🚢 \nD 🔵 🔵 🔵 🚢 \n", @board.render(true)
+        assert_equal "   1  2  3  4  \nA 🚢 🚢 🚢 🔵 \nB 🔵 🔵 🔵 🔵 \nC 🔵 🔵 🔵 🚢 \nD 🔵 🔵 🔵 🚢 \n", @board.render(true)
   end
 
     #   1 2 3 4
