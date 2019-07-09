@@ -149,4 +149,5 @@ class Board
       end.join
   end
 end
+
 end

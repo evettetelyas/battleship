@@ -10,6 +10,25 @@ class Game
     @player_ships = {cruiser: Ship.new("Cruiser", 3), submarine: Ship.new("Submarine", 2)}
   end
 
+  def open
+    puts "Welcome to BATTLESHIP"
+    puts "Enter p to play. Enter q to quit"
+    print "> "
+
+    answer = gets.chomp.downcase
+    until answer == "p" || answer == "q"
+        puts "that's not valid, please try again!"
+        puts "Enter p to play. Enter q to quit"
+        print "> "
+        answer = gets.chomp.downcase
+      end
+    if answer == "p"
+      place_all_comp_ships
+    elsif answer == "q"
+      puts "Goodbye!"
+      exit
+    end
+  end
   def start
 
       puts "Welcome to BATTLESHIP"
