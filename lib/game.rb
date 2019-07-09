@@ -1,51 +1,65 @@
 require 'colorize'
 
 class Game
-  attr_reader :comp_board, :player_board, :comp_ships, :player_ships, :height, :width
+  attr_reader :comp_board, :player_board, :comp_ships, :player_ships
 
   def initialize(comp_board, player_board)
     @comp_board = comp_board
     @player_board = player_board
-    @comp_ships = {cruiser: Ship.new("Cruiser", 3), submarine: Ship.new("Submarine", 2)}
-    @player_ships = {cruiser: Ship.new("Cruiser", 3), submarine: Ship.new("Submarine", 2)}
-    @height = height
-    @width = width
+    @comp_ships = {}
+    @player_ships = {}
   end
 
   def place_all_comp_ships
     @comp_ships.keys.each {|key| @comp_board.place_comp_ship(@comp_ships[key])}
-    place_player_cruiser
+    place_player_ship_1
   end
 
-  def place_player_cruiser
-    puts "\n\nI have laid out my ships on the grid. You now need to lay your two ships. The #{@player_ships[:cruiser].name} is #{@player_ships[:cruiser].health} units long, and the #{@player_ships[:submarine].name} is #{@player_ships[:submarine].health} units long."
+  def place_player_ship_1
+    puts "\n\nI have laid out my ships on the grid. You now need to lay your two ships. The #{@player_ships[:ship_1].name} is #{@player_ships[:ship_1].health} units long, the #{@player_ships[:ship_2].name} is #{@player_ships[:ship_2].health} units long, and the #{@player_ships[:ship_3].name} is #{@player_ships[:ship_3].health} units long."
     puts @player_board.render
-    puts "\nEnter the squares for your #{@player_ships[:cruiser].name} (#{@player_ships[:cruiser].health} spaces)"
+    puts "\nEnter the squares for your #{@player_ships[:ship_1].name} (#{@player_ships[:ship_1].health} spaces)"
     print "> "
 
     coordinates = (gets.chomp.upcase.split(" ")).map {|cell| cell.to_sym}
 
-    until @player_board.valid_placement?(@player_ships[:cruiser], coordinates)
+    until @player_board.valid_placement?(@player_ships[:ship_1], coordinates)
       puts "Those are invalid coordinates. Please try again:"
       coordinates = (gets.chomp.upcase.split(" ")).map {|cell| cell.to_sym}
     end
-    @player_board.place(@player_ships[:cruiser], coordinates)
+    @player_board.place(@player_ships[:ship_1], coordinates)
     puts @player_board.render(true)
 
-    place_player_submarine
+    place_player_ship_2
   end
 
-  def place_player_submarine
-    puts "Enter the squares for your #{@player_ships[:submarine].name} (#{@player_ships[:submarine].health} spaces)"
+  def place_player_ship_2
+    puts "Enter the squares for your #{@player_ships[:ship_2].name} (#{@player_ships[:ship_2].health} spaces)"
     print "> "
 
     coordinates = (gets.chomp.upcase.split(" ")).map {|cell| cell.to_sym}
 
-    until @player_board.valid_placement?(@player_ships[:submarine], coordinates)
+    until @player_board.valid_placement?(@player_ships[:ship_2], coordinates)
       puts "Those are invalid coordinates. Please try again:"
       coordinates = (gets.chomp.upcase.split(" ")).map {|cell| cell.to_sym}
     end
-    @player_board.place(@player_ships[:submarine], coordinates)
+    @player_board.place(@player_ships[:ship_2], coordinates)
+    puts @player_board.render(true)
+
+    place_player_ship_3
+  end
+
+  def place_player_ship_3
+    puts "Enter the squares for your #{@player_ships[:ship_3].name} (#{@player_ships[:ship_3].health} spaces)"
+    print "> "
+
+    coordinates = (gets.chomp.upcase.split(" ")).map {|cell| cell.to_sym}
+
+    until @player_board.valid_placement?(@player_ships[:ship_3], coordinates)
+      puts "Those are invalid coordinates. Please try again:"
+      coordinates = (gets.chomp.upcase.split(" ")).map {|cell| cell.to_sym}
+    end
+    @player_board.place(@player_ships[:ship_3], coordinates)
     puts @player_board.render(true)
 
     turn
