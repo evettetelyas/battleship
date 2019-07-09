@@ -52,7 +52,7 @@ class Cell
       return "\u{1F535}"
     elsif fired_upon? && empty?
       # return "M".colorize(:light_blue)
-      return "\u{1F537}"
+      return "\u{1F518}"
     elsif fired_upon? && !empty? && !@ship.sunk?
       # return "H".colorize(:red)
       return "\u{1F4A5}"
@@ -66,9 +66,9 @@ class Cell
     if fired_upon? && empty?
       return "was a miss."
     elsif fired_upon? && !empty? && !@ship.sunk?
-      return "was a hit!"
+      return "hit the #{@ship.name}!"
     elsif fired_upon? && !empty? && @ship.sunk?
-      return "sunk the ship!"
+      return "sunk the #{@ship.name}!"
     end
   end
 
