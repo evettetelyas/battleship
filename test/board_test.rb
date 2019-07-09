@@ -46,6 +46,7 @@ class BoardTest < Minitest::Test
     assert_equal 16, @board.cells.count
   end
 
+
   def test_if_coordinate_is_valid
     @board.make_cell_hash
     assert @board.valid_coordinate(:A1)

@@ -4,44 +4,25 @@ require './lib/board'
 require './lib/game'
 require 'pry'
 
-  # @computer_cells = {
-  #           A1: Cell.new(:A1),
-  #           A2: Cell.new(:A2),
-  #           A3: Cell.new(:A3),
-  #           A4: Cell.new(:A4),
-  #           B1: Cell.new(:B1),
-  #           B2: Cell.new(:B2),
-  #           B3: Cell.new(:B3),
-  #           B4: Cell.new(:B4),
-  #           C1: Cell.new(:C1),
-  #           C2: Cell.new(:C2),
-  #           C3: Cell.new(:C3),
-  #           C4: Cell.new(:C4),
-  #           D1: Cell.new(:D1),
-  #           D2: Cell.new(:D2),
-  #           D3: Cell.new(:D3),
-  #           D4: Cell.new(:D4)
-  #         }
-  # @player_cells = {
-  #           A1: Cell.new(:A1),
-  #           A2: Cell.new(:A2),
-  #           A3: Cell.new(:A3),
-  #           A4: Cell.new(:A4),
-  #           B1: Cell.new(:B1),
-  #           B2: Cell.new(:B2),
-  #           B3: Cell.new(:B3),
-  #           B4: Cell.new(:B4),
-  #           C1: Cell.new(:C1),
-  #           C2: Cell.new(:C2),
-  #           C3: Cell.new(:C3),
-  #           C4: Cell.new(:C4),
-  #           D1: Cell.new(:D1),
-  #           D2: Cell.new(:D2),
-  #           D3: Cell.new(:D3),
-  #           D4: Cell.new(:D4)
-  #                 }
-@computer_board = Board.new()
-@player_board = Board.new()
+puts "Add the dimensions of your board:"
+    print "Height: "
+    @height = gets.chomp.to_i
+    print "Width: "
+    @width = gets.chomp.to_i
+    if @height < 4 || @width < 4
+      puts "Your board is too small. Both height and width must be at least 4 cells. Automatically set to 4x4 board."
+        @height = 4
+        @width = 4
+      elsif @height > 9 || @width > 9
+        puts "Your board is too big. Both height and width must be 9 cells or less. Automatically set to 9x9 board."
+          @height = 9
+          @width = 9
+    end
+
+
+
+@computer_board = Board.new(@height, @width)
+@player_board = Board.new(@height, @width)
 @computer_cruiser = Ship.new("Cruiser", 3)
 @player_cruiser = Ship.new("Cruiser", 3)
 @computer_submarine = Ship.new("Submarine", 2)

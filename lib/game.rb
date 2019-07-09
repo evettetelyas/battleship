@@ -103,12 +103,6 @@ def turn
 
     @comp_board.cells[answer].fire_upon
 
-
-    # random_hit = @player_board.cells.keys.sample
-    # until @player_board.cells[random_hit].number_of_shots < 1
-    #   random_hit = @player_board.cells.keys.sample
-    # end
-
     random_hit_ary = []
     random_hit_ary = @player_board.cells.keys.select {|cell| @player_board.cells[cell].number_of_shots < 1}
 
