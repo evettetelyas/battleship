@@ -61,7 +61,7 @@ class CellTest < Minitest::Test
     cell = Cell.new("C4")
     cell.fire_upon
 
-    assert_equal "🔷", cell.render
+    assert_equal "🔘", cell.render
 
     @cell.fire_upon
 

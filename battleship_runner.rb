@@ -47,21 +47,21 @@ puts "\n\n\n\u{1F6A2 1F4A3 1F4A6}WELCOME TO BATTLESHIP\u{1F4A6 1F4A3 1F6A2}"
         puts "Name your first ship:"
         print "> "
         ship_1_name = gets.chomp.capitalize
-        puts "How many cells will #{ship_1_name} take?"
+        puts "How many cells will the #{ship_1_name} take?"
         print "> "
         ship_1_health = gets.chomp.to_i
 
         puts "Name your second ship:"
         print "> "
         ship_2_name = gets.chomp.capitalize
-        puts "How many cells will #{ship_2_name} take?"
+        puts "How many cells will the #{ship_2_name} take?"
         print "> "
         ship_2_health = gets.chomp.to_i
 
         puts "Name your third ship:"
         print "> "
         ship_3_name = gets.chomp.capitalize
-        puts "How many cells will #{ship_3_name} take?"
+        puts "How many cells will the #{ship_3_name} take?"
         print "> "
         ship_3_health = gets.chomp.to_i
 
