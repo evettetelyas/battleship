@@ -71,5 +71,4 @@ class Cell
       return "sunk the #{@ship.name}!"
     end
   end
-
  end
