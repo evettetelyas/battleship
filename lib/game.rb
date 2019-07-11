@@ -12,9 +12,7 @@ class Game
   end
 
   def place_all_comp_ships
-    @comp_ships.values.each do |values|
-      @comp_board.place_comp_ship(values)
-    end
+    @comp_ships.keys.each {|key| @comp_board.place_comp_ship(@comp_ships[key])}
   end
 
   def place_player_ships
@@ -34,9 +32,8 @@ class Game
           puts "those coordinates were not valid, try again"
         end
       end
-
-      @player_board.place(ship, coordinates)
-      puts @player_board.render(true)
+    @player_board.place(ship, coordinates)
+    puts @player_board.render(true)
     end
   end
 
@@ -72,7 +69,6 @@ class Game
 
       @comp_board.cells[answer].fire_upon
 
-
       random_hit_ary = []
       random_hit_ary = @player_board.cells.keys.select {|cell| @player_board.cells[cell].number_of_shots < 1}
 
@@ -83,7 +79,6 @@ class Game
       puts "\n\n\nYour shot on #{answer.upcase.to_s} #{@comp_board.cells[answer].render_output}"
       puts "My shot on #{@random_hit.upcase.to_s} #{@player_board.cells[@random_hit].render_output}"
     end
-
 
     puts "=============FINAL COMPUTER BOARD============="
     puts @comp_board.render(true)

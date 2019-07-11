@@ -8,9 +8,9 @@ require 'pry'
 class BoardTest < Minitest::Test
 
   def setup
-      @board = Board.new()
-      @cruiser = Ship.new("Cruiser", 3)
-      @submarine = Ship.new("Submarine", 2)
+    @board = Board.new()
+    @cruiser = Ship.new("Cruiser", 3)
+    @submarine = Ship.new("Submarine", 2)
   end
 
   def test_board_exist
@@ -24,7 +24,6 @@ class BoardTest < Minitest::Test
     assert_instance_of Hash, @board.cells
     assert_equal 16, @board.cells.count
   end
-
 
   def test_if_coordinate_is_valid
     skip
@@ -173,9 +172,6 @@ class BoardTest < Minitest::Test
   def test_board_render
     skip
     @board.make_cell_hash
-    # binding.pry
-
-    # @board.render
     assert_equal "   1  2  3  4  \nA 🔵 🔵 🔵 🔵 \nB 🔵 🔵 🔵 🔵 \nC 🔵 🔵 🔵 🔵 \nD 🔵 🔵 🔵 🔵 \n", @board.render
 
     coordinates_1 = [:A1, :A2, :A3]
@@ -184,6 +180,6 @@ class BoardTest < Minitest::Test
     @board.place(@submarine, coordinates_2)
     @board.render(true)
 
-        assert_equal "   1  2  3  4  \nA 🚢 🚢 🚢 🔵 \nB 🔵 🔵 🔵 🔵 \nC 🔵 🔵 🔵 🚢 \nD 🔵 🔵 🔵 🚢 \n", @board.render(true)
+    assert_equal "   1  2  3  4  \nA 🚢 🚢 🚢 🔵 \nB 🔵 🔵 🔵 🔵 \nC 🔵 🔵 🔵 🚢 \nD 🔵 🔵 🔵 🚢 \n", @board.render(true)
   end
 end

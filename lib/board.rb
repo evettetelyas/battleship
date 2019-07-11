@@ -1,10 +1,10 @@
 class Board
   attr_reader :cells, :num_let, :num_num
 
-  def initialize(num_let = 4, num_num = 4)
+  def initialize(num_let, num_num)
     @cells = {}
-    @num_let = ("A".."Z").to_a[0..num_let-1]
-    @num_num = ("1".."26").to_a[0..num_num-1]
+    @num_let = ("A".."J").to_a[0..num_let-1]
+    @num_num = ("1".."10").to_a[0..num_num-1]
   end
 
   def make_cell_keys
@@ -87,7 +87,8 @@ class Board
     split_coordinates = coordinates.map {|coordinate|
         coordinate.to_s.chars}
 
-    num_of_uniq_num = split_coordinates.map {|c| c[1..-1]}.uniq.length
+    num_of_uniq_num = split_coordinates.map {|c| c[1..-1].join}.uniq.length
+
     num_of_uniq_num == 1
   end
 
@@ -97,12 +98,12 @@ class Board
   end
 
   def numbers_sequential?(coordinates)
-    # split_coordinates = coordinates.map {|coordinate|
-    #     coordinate.to_s.chars}
+    split_coordinates = coordinates.map {|coordinate|
+        coordinate.to_s.chars}
 
-    num = split_coordinates(coordinates).map {|c| c[1]}
+    num = split_coordinates.map {|c| c[1..-1]}
 
-    num_i = num.map {|n| n.to_i}
+    num_i = num.map {|n| n.join.to_i}
 
     num_i.each_cons(2).all? {|first, second| second == first + 1}
   end

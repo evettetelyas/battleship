@@ -65,5 +65,4 @@ class Cell
       "sunk the #{@ship.name}!"
     end
   end
-
  end
