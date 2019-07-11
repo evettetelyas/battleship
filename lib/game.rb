@@ -32,9 +32,8 @@ class Game
           puts "those coordinates were not valid, try again"
         end
       end
-
-      @player_board.place(ship, coordinates)
-      puts @player_board.render(true)
+    @player_board.place(ship, coordinates)
+    puts @player_board.render(true)
     end
   end
 
@@ -81,7 +80,6 @@ class Game
       puts "\n\n\nYour shot on #{answer.upcase.to_s} #{@comp_board.cells[answer].render_output}"
       puts "My shot on #{@random_hit.upcase.to_s} #{@player_board.cells[@random_hit].render_output}"
     end
-
 
     puts "=============FINAL COMPUTER BOARD============="
     puts @comp_board.render(true)

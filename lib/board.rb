@@ -1,7 +1,7 @@
 class Board
   attr_reader :cells, :num_let, :num_num
 
-  def initialize(num_let = 4, num_num = 4)
+  def initialize(num_let, num_num)
     @cells = {}
     @num_let = ("A".."J").to_a[0..num_let-1]
     @num_num = ("1".."10").to_a[0..num_num-1]
