@@ -69,7 +69,7 @@ class Game
       end
 
       @comp_board.cells[answer].fire_upon
-      
+
 
       random_hit_ary = []
       random_hit_ary = @player_board.cells.keys.select {|cell| @player_board.cells[cell].number_of_shots < 1}
@@ -84,7 +84,7 @@ class Game
 
 
     puts "=============FINAL COMPUTER BOARD============="
-    puts @comp_board.render
+    puts @comp_board.render(true)
     puts "=============FINAL PLAYER BOARD============="
     puts @player_board.render(true)
   end
