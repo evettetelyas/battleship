@@ -58,8 +58,8 @@ loop do
   print "> "
   ship_num = gets.chomp.to_i
 
-  until ship_num.between?(1,5)
-    puts "you can only put between 1 and 5 ships. Pick again!"
+  until ship_num.between?(1,height - 1)
+    puts "you can only put between 1 and #{height - 1} ships. Pick again!"
     ship_num = gets.chomp.to_i
   end
 
