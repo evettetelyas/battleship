@@ -1,79 +1,99 @@
-require 'minitest/autorun'
-require 'minitest/pride'
 require './lib/ship'
 require './lib/cell'
 require './lib/board'
 require './lib/game'
 require 'pry'
 
-  @computer_cells = {
-            A1: Cell.new(:A1),
-            A2: Cell.new(:A2),
-            A3: Cell.new(:A3),
-            A4: Cell.new(:A4),
-            B1: Cell.new(:B1),
-            B2: Cell.new(:B2),
-            B3: Cell.new(:B3),
-            B4: Cell.new(:B4),
-            C1: Cell.new(:C1),
-            C2: Cell.new(:C2),
-            C3: Cell.new(:C3),
-            C4: Cell.new(:C4),
-            D1: Cell.new(:D1),
-            D2: Cell.new(:D2),
-            D3: Cell.new(:D3),
-            D4: Cell.new(:D4)
-          }
-  @player_cells = {
-            A1: Cell.new(:A1),
-            A2: Cell.new(:A2),
-            A3: Cell.new(:A3),
-            A4: Cell.new(:A4),
-            B1: Cell.new(:B1),
-            B2: Cell.new(:B2),
-            B3: Cell.new(:B3),
-            B4: Cell.new(:B4),
-            C1: Cell.new(:C1),
-            C2: Cell.new(:C2),
-            C3: Cell.new(:C3),
-            C4: Cell.new(:C4),
-            D1: Cell.new(:D1),
-            D2: Cell.new(:D2),
-            D3: Cell.new(:D3),
-            D4: Cell.new(:D4)
-                  }
-@computer_board = Board.new(@computer_cells)
-@player_board = Board.new(@player_cells)
-@computer_cruiser = Ship.new("Cruiser", 3)
-@player_cruiser = Ship.new("Cruiser", 3)
-@computer_submarine = Ship.new("Submarine", 2)
-@player_submarine = Ship.new("Submarine", 2)
+loop do
 
-def start
-  puts "Welcome to BATTLESHIP"
+  puts "\n\n\n\u{1F6A2 1F4A3 1F4A6}WELCOME TO BATTLESHIP\u{1F4A6 1F4A3 1F6A2}"
   puts "Enter p to play. Enter q to quit"
   print "> "
-
   answer = gets.chomp.downcase
+  until answer == "p" || answer == "q"
+    puts "that's not valid, please try again!"
+    puts "Enter p to play. Enter q to quit"
+    print "> "
+    answer = gets.chomp.downcase
+  end
 
   if answer == "q"
     puts "Goodbye!"
-  elsif answer == "p"
+    exit
   end
-  @computer_board.place_comp_ship(@computer_cruiser)
-  @computer_board.place_comp_ship(@computer_submarine)
 
-  puts "I have laid out my ships on the grid. You now need to lay your two ships. The Cruiser is three units long, and the Submarine is two."
-  puts @player_board.render
-  puts "Enter the squares for your Cruiser"
+  puts "Add the dimensions of your board:"
+  print "Height: "
+  height = gets.chomp.to_i
+  print "Width: "
+  width = gets.chomp.to_i
+
+  computer_board = Board.new(height, width)
+  player_board = Board.new(height, width)
+  game = Game.new(computer_board, player_board)
+
+
+  if height < 4 || width < 4
+    puts "\nBoth height and width must be at least 4 cells. Automatically set to 4x4 board."
+    height = 4
+    width = 4
+
+  elsif height > 10 || width > 10
+    puts "\nYour board is too big. Both height and width must be 10 cells or less. Automatically set to 10x10 board."
+    height = 10
+    width = 10
+
+  elsif height.between?(4,10) && width.between?(4,10)
+    puts "\nGreat! You are all set with a #{height}x#{width} board!"
+
+  else puts "\nThat's not a valid input, please try again:"
+    print "Height: "
+    height = gets.chomp.to_i
+    print "Width: "
+    width = gets.chomp.to_i
+  end
+
+  puts "\n\nNow, let's set up the ships!"
+  puts "How many ships do you want to create?"
   print "> "
+  ship_num = gets.chomp.to_i
 
-  player_cruiser_placement_data = gets.chomp.upcase.split(" ")
+  until ship_num.between?(1,3)
+    puts "you can only put between 1 and 3 ships. Pick again!"
+    ship_num = gets.chomp.to_i
+  end
 
-  player_cruiser_placement = player_cruiser_placement_data.map {|cell| cell.to_sym}
+  puts "Cool, we'll set up #{ship_num} ships!"
 
+  ship_num.times do |ship_number|
+    puts "Let's set up ship number #{ship_number+1}."
+    puts "Name ship number #{ship_number+1}:"
+    print "> "
+    ship_name = gets.chomp.capitalize
+
+    puts "How many cells will the #{ship_name} take?"
+    print "> "
+    ship_health = gets.chomp.to_i
+    until ship_health.between?(1,4)
+      puts "You can only pick between 1 and 4 cells!"
+      ship_health = gets.chomp.to_i
+    end
+    if ship_health > 4
+      puts "Max ship length is 5 units. Your ship is automatically set to 5 units."
+      ship_health = 4
+    elsif ship_health > (height || width)
+      puts "Your ship is longer than your board! Your ship is automatically set to 3 units."
+      ship_health = 3
+    end
+
+    game.player_ships[ship_name] = Ship.new(ship_name, ship_health)
+    game.comp_ships[ship_name] = Ship.new(ship_name, ship_health)
+  end
+
+  computer_board.make_cell_hash
+  player_board.make_cell_hash
+  game.place_all_comp_ships
+  game.place_player_ships
+  game.turn
+  game.final_results
 end
-
-
-
-start
