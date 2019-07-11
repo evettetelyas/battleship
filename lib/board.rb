@@ -1,7 +1,7 @@
 class Board
   attr_reader :cells, :num_let, :num_num
 
-  def initialize(num_let, num_num)
+  def initialize(num_let = 4, num_num = 4)
     @cells = {}
     @num_let = ("A".."J").to_a[0..num_let-1]
     @num_num = ("1".."10").to_a[0..num_num-1]
@@ -61,10 +61,8 @@ class Board
   end
 
   def all_letters_same?(coordinates)
-    # binding.pry
     split_coordinates = coordinates.map {|coordinate|
         coordinate.to_s.chars}
-        # binding.pry
     num_of_uniq_letter = split_coordinates.map {|c| c[0]}.uniq.length
 
     num_of_uniq_letter == 1
@@ -79,10 +77,6 @@ class Board
     num_of_uniq_letter == split_coordinates.count
   end
 
-  # def combine_integers(split_coordinates)
-  #
-  # end
-
   def all_numbers_same?(coordinates)
     split_coordinates = coordinates.map {|coordinate|
         coordinate.to_s.chars}
@@ -90,11 +84,6 @@ class Board
     num_of_uniq_num = split_coordinates.map {|c| c[1..-1].join}.uniq.length
 
     num_of_uniq_num == 1
-  end
-
-  def split_coordinates(coordinates)
-    coordinates.map {|coordinate|
-        coordinate.to_s.chars}
   end
 
   def numbers_sequential?(coordinates)
@@ -121,23 +110,6 @@ class Board
 
   def place(ship, coordinates)
     coordinates.map {|coordinate| @cells[coordinate].place_ship(ship)}
-  end
-
-  def random_vert_horiz
-    arr = [0, 1]
-    num = arr.sample
-    if num == 0
-
-      comp_placement = comp_place_first << @cells.keys(ship.length - 1)
-    else
-    #try to place ship vertical
-    end
-    split_coordinates = coordinates.map {|coordinate|
-        coordinate.to_s.chars}
-        # binding.pry
-    num_of_uniq_letter = split_coordinates.map {|c| c[0]}.uniq.length
-
-    num_of_uniq_letter == 1
   end
 
   def place_comp_ship(ship)

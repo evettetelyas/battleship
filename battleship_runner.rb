@@ -59,7 +59,7 @@ loop do
   ship_num = gets.chomp.to_i
 
   until ship_num.between?(1,height - 1)
-    puts "you can only put between 1 and #{height - 1} ships. Pick again!"
+    puts "you can only place between 1 and #{height - 1} ships. Pick again!"
     ship_num = gets.chomp.to_i
   end
 

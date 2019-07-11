@@ -9,8 +9,8 @@ require 'pry'
 class GameTest < Minitest::Test
 
   def setup
-    @computer_board = Board.new(@num_let, @num_num)
-    @player_board = Board.new(@num_let, @num_num)
+    @computer_board = Board.new
+    @player_board = Board.new
     @computer_cruiser = Ship.new("Cruiser", 3)
     @player_cruiser = Ship.new("Cruiser", 3)
     @computer_submarine = Ship.new("Submarine", 2)
@@ -21,12 +21,11 @@ class GameTest < Minitest::Test
   end
 
   def test_game_exist
-    skip
+
     assert_instance_of Game, @game
   end
 
   def test_access_boards
-    skip
     assert_equal @computer_board, @game.comp_board
     assert_equal @player_board, @game.player_board
   end
@@ -40,14 +39,9 @@ class GameTest < Minitest::Test
   end
 
   def test_place_player_ships
-    skip
     assert @player_board.all_cells_empty?([:A1, :A2, :A3, :A4, :B1, :B2, :B3, :B4, :C1, :C2, :C3, :C4,:D1, :D2, :D3, :D4])
 
-    @game.place_player_cruiser
-
-    refute @player_board.all_cells_empty?([:A1, :A2, :A3, :A4, :B1, :B2, :B3, :B4, :C1, :C2, :C3, :C4,:D1, :D2, :D3, :D4])
-
-    @game.place_player_submarine
+    @game.place_player_ships
 
     refute @player_board.all_cells_empty?([:A1, :A2, :A3, :A4, :B1, :B2, :B3, :B4, :C1, :C2, :C3, :C4,:D1, :D2, :D3, :D4])
   end

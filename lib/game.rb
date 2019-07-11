@@ -88,9 +88,9 @@ class Game
 
   def final_results
     if @comp_ships.values.all? {|ship| ship.sunk?}
-      puts "\n\n\u{1F3C6 1F3C6}You won!\u{1F3C6 1F3C6}\n\n".colorize(:magenta)
+      puts "\n\n\u{1F3C6 1F3C6} You won! \u{1F3C6 1F3C6}\n\n".colorize(:magenta)
     elsif @player_ships.values.all? {|ship| ship.sunk?}
-      puts "\n\n\u{1F3C6 1F3C6}I won!\u{1F3C6 1F3C6}\n\n".colorize(:magenta)
+      puts "\n\n\u{1F3C6 1F3C6} I won! \u{1F3C6 1F3C6}\n\n".colorize(:magenta)
     end
   end
 end
