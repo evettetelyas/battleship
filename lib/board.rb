@@ -15,6 +15,14 @@ class Board
     end.flatten
   end
 
+  def make_cell_keys_2
+    @num_num.map do |num|
+      @num_let.map do |let|
+        (let + num).to_sym
+      end
+    end.flatten
+  end
+
   def make_cell_hash
     make_cell_keys.map do |key|
       @cells[key] = Cell.new(key)
@@ -39,28 +47,24 @@ class Board
 
   def valid_placement?(ship, coordinates)
     if !valid_multiple_coordinates(coordinates)
-      return false
+      false
     elsif
       !all_cells_empty?(coordinates)
-      return false
+      false
     elsif
       all_letters_same?(coordinates) && numbers_sequential?(coordinates) && ship.length == coordinates.count
-      return true
+      true
     elsif
       all_letters_uniq?(coordinates) && all_numbers_same?(coordinates) && letters_sequential?(coordinates) && ship.length == coordinates.count
-      return true
+      true
     end
   end
 
-  def split_coordinates(coordinates)
-    @split_coordinates = coordinates.map {|coordinate|
-        coordinate.to_s.chars}
-  end
-
   def all_letters_same?(coordinates)
+    # binding.pry
     split_coordinates = coordinates.map {|coordinate|
         coordinate.to_s.chars}
-
+        # binding.pry
     num_of_uniq_letter = split_coordinates.map {|c| c[0]}.uniq.length
 
     num_of_uniq_letter == 1
@@ -75,6 +79,10 @@ class Board
     num_of_uniq_letter == split_coordinates.count
   end
 
+  # def combine_integers(split_coordinates)
+  #
+  # end
+
   def all_numbers_same?(coordinates)
     split_coordinates = coordinates.map {|coordinate|
         coordinate.to_s.chars}
@@ -82,6 +90,11 @@ class Board
     num_of_uniq_num = split_coordinates.map {|c| c[1..-1].join}.uniq.length
 
     num_of_uniq_num == 1
+  end
+
+  def split_coordinates(coordinates)
+    coordinates.map {|coordinate|
+        coordinate.to_s.chars}
   end
 
   def numbers_sequential?(coordinates)
@@ -110,12 +123,35 @@ class Board
     coordinates.map {|coordinate| @cells[coordinate].place_ship(ship)}
   end
 
-  def place_comp_ship(ship)
-    comp_placement = []
-    until valid_placement?(ship, comp_placement)
-      comp_placement = @cells.keys.sample(ship.length)
+  def random_vert_horiz
+    arr = [0, 1]
+    num = arr.sample
+    if num == 0
+
+      comp_placement = comp_place_first << @cells.keys(ship.length - 1)
+    else
+    #try to place ship vertical
     end
-    place(ship, comp_placement)
+    split_coordinates = coordinates.map {|coordinate|
+        coordinate.to_s.chars}
+        # binding.pry
+    num_of_uniq_letter = split_coordinates.map {|c| c[0]}.uniq.length
+
+    num_of_uniq_letter == 1
+  end
+
+  def place_comp_ship(ship)
+    placement_1 = []
+    until valid_placement?(ship, placement_1)
+    comp_place_first = @cells.keys.sample(1).join.to_sym
+    v_h = [0, 1].sample
+      if v_h == 0
+        placement_1 = make_cell_keys.slice(make_cell_keys.index(comp_place_first)..(make_cell_keys.index(comp_place_first) + ship.length-1))
+      elsif v_h == 1
+        placement_1 = make_cell_keys_2.slice(make_cell_keys_2.index(comp_place_first)..(make_cell_keys_2.index(comp_place_first) + ship.length-1))
+      end
+    end
+    place(ship, placement_1)
   end
 
   def render(show = false)

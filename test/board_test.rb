@@ -19,12 +19,14 @@ class BoardTest < Minitest::Test
   end
 
   def test_board_has_cells
+    skip
     @board.make_cell_hash
     assert_instance_of Hash, @board.cells
     assert_equal 16, @board.cells.count
   end
 
   def test_if_coordinate_is_valid
+    skip
     @board.make_cell_hash
     assert @board.valid_coordinate(:A1)
     assert @board.valid_coordinate(:D4)
@@ -34,6 +36,7 @@ class BoardTest < Minitest::Test
   end
 
   def test_if_valid_multiple_coordinates
+    skip
     @board.make_cell_hash
     coordinates_1 = [:A1, :A2, :A3]
 
@@ -49,6 +52,7 @@ class BoardTest < Minitest::Test
   end
 
   def test_all_cells_empty?
+    skip
     @board.make_cell_hash
     coordinates_3 = [:C1, :C2, :C3]
     coordinates_1 = [:A1, :A2, :A3]
@@ -62,6 +66,7 @@ class BoardTest < Minitest::Test
   end
 
   def test_valid_placement_for_ship
+    skip
     @board.make_cell_hash
     refute @board.valid_placement?(@cruiser, [:A3, :A2, :A1])
     refute @board.valid_placement?(@cruiser, [:A1, :A2, :A4])
@@ -78,6 +83,7 @@ class BoardTest < Minitest::Test
   end
 
   def test_all_letters_of_coordinates_same
+    skip
     @board.make_cell_hash
     coordinates_1 = [:A1, :A2, :A3]
     assert @board.all_letters_same?(coordinates_1)
@@ -88,6 +94,7 @@ class BoardTest < Minitest::Test
   end
 
   def test_all_letters_uniq
+    skip
     @board.make_cell_hash
     coordinates_1 = [:A1, :B2, :C3, :D4]
     assert @board.all_letters_uniq?(coordinates_1)
@@ -98,6 +105,7 @@ class BoardTest < Minitest::Test
   end
 
   def test_all_numbers_are_same
+    skip
     @board.make_cell_hash
     coordinates_1 = [:A1, :B1, :C1]
     assert @board.all_numbers_same?(coordinates_1)
@@ -110,6 +118,7 @@ class BoardTest < Minitest::Test
   end
 
   def test_numbers_are_sequential
+    skip
     @board.make_cell_hash
     coordinates_1 = [:A1, :A2, :A3]
     assert @board.numbers_sequential?(coordinates_1)
@@ -122,6 +131,7 @@ class BoardTest < Minitest::Test
   end
 
   def test_letters_are_sequential
+    skip
     @board.make_cell_hash
     coordinates_1 = [:A1, :A2, :A3]
     refute @board.letters_sequential?(coordinates_1)
@@ -135,6 +145,7 @@ class BoardTest < Minitest::Test
 
   def test_place_ship
     @board.make_cell_hash
+    binding.pry
     coordinates_1 = [:A1, :A2, :A3]
     coordinates_2 = [:B1, :B2]
     @board.place(@cruiser, coordinates_1)
@@ -159,6 +170,7 @@ class BoardTest < Minitest::Test
   end
 
   def test_board_render
+    skip
     @board.make_cell_hash
     assert_equal "   1  2  3  4  \nA 🔵 🔵 🔵 🔵 \nB 🔵 🔵 🔵 🔵 \nC 🔵 🔵 🔵 🔵 \nD 🔵 🔵 🔵 🔵 \n", @board.render
 

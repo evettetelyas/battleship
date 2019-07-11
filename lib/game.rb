@@ -69,7 +69,6 @@ class Game
 
       @comp_board.cells[answer].fire_upon
 
-
       random_hit_ary = []
       random_hit_ary = @player_board.cells.keys.select {|cell| @player_board.cells[cell].number_of_shots < 1}
 

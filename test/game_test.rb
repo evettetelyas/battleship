@@ -31,13 +31,7 @@ class GameTest < Minitest::Test
     assert_equal @player_board, @game.player_board
   end
 
-  def test_start_p
-    skip
-    assert_nil @game.start
-  end
-
   def test_can_place_computer_ships
-    skip
     assert @computer_board.all_cells_empty?([:A1, :A2, :A3, :A4, :B1, :B2, :B3, :B4, :C1, :C2, :C3, :C4,:D1, :D2, :D3, :D4])
 
     @game.place_all_comp_ships

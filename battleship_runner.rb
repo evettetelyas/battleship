@@ -58,8 +58,8 @@ loop do
   print "> "
   ship_num = gets.chomp.to_i
 
-  until ship_num.between?(1,3)
-    puts "you can only put between 1 and 3 ships. Pick again!"
+  until ship_num.between?(1,5)
+    puts "you can only put between 1 and 5 ships. Pick again!"
     ship_num = gets.chomp.to_i
   end
 
@@ -74,12 +74,12 @@ loop do
     puts "How many cells will the #{ship_name} take?"
     print "> "
     ship_health = gets.chomp.to_i
-    until ship_health.between?(1,4)
-      puts "You can only pick between 1 and 4 cells!"
+    until ship_health.between?(1,9)
+      puts "You can only pick between 1 and 9 cells!"
       ship_health = gets.chomp.to_i
     end
-    if ship_health > 4
-      puts "Max ship length is 5 units. Your ship is automatically set to 5 units."
+    if ship_health > 9
+      puts "Max ship length is 9 units. Your ship is automatically set to 5 units."
       ship_health = 4
     elsif ship_health > (height || width)
       puts "Your ship is longer than your board! Your ship is automatically set to 3 units."
