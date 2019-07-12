@@ -28,11 +28,6 @@ loop do
   print "Width: "
   width = gets.chomp.to_i
 
-  computer_board = Board.new(height, width)
-  player_board = Board.new(height, width)
-  game = Game.new(computer_board, player_board)
-
-
   if height < 4 || width < 4
     puts "\nBoth height and width must be at least 4 cells. Automatically set to 4x4 board."
     height = 4
@@ -52,6 +47,10 @@ loop do
     print "Width: "
     width = gets.chomp.to_i
   end
+
+  computer_board = Board.new(height, width)
+  player_board = Board.new(height, width)
+  game = Game.new(computer_board, player_board)
 
   puts "\n\nNow, let's set up the ships!"
   puts "How many ships do you want to create?"
