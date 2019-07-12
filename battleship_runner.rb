@@ -3,10 +3,11 @@ require './lib/cell'
 require './lib/board'
 require './lib/game'
 require 'pry'
+require 'colorize'
 
 loop do
 
-  puts "\n\n\n\u{1F6A2 1F4A3 1F4A6}WELCOME TO BATTLESHIP\u{1F4A6 1F4A3 1F6A2}"
+  puts "\n\n\n\u{1F6A2 1F4A3 1F4A6}WELCOME TO BATTLESHIP\u{1F4A6 1F4A3 1F6A2}".colorize(:light_blue)
   puts "Enter p to play. Enter q to quit"
   print "> "
   answer = gets.chomp.downcase
@@ -22,7 +23,7 @@ loop do
     exit
   end
 
-  puts "Add the dimensions of your board:"
+  puts "\nAdd the dimensions of your board:"
   print "Height: "
   height = gets.chomp.to_i
   print "Width: "
@@ -59,13 +60,14 @@ loop do
 
   until ship_num.between?(1,height - 1)
     puts "you can only place between 1 and #{height - 1} ships. Pick again!"
+    print "> "
     ship_num = gets.chomp.to_i
   end
 
-  puts "Cool, we'll set up #{ship_num} ships!"
+  puts "\n\nCool, we'll set up #{ship_num} ships!"
 
   ship_num.times do |ship_number|
-    puts "Let's set up ship number #{ship_number+1}."
+    puts "\nLet's set up ship number #{ship_number+1}."
     puts "Name ship number #{ship_number+1}:"
     print "> "
     ship_name = gets.chomp.capitalize

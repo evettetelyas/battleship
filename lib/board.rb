@@ -52,12 +52,20 @@ class Board
       !all_cells_empty?(coordinates)
       false
     elsif
-      all_letters_same?(coordinates) && numbers_sequential?(coordinates) && ship.length == coordinates.count
+      valid_vertical_placement?(ship, coordinates)
       true
     elsif
-      all_letters_uniq?(coordinates) && all_numbers_same?(coordinates) && letters_sequential?(coordinates) && ship.length == coordinates.count
+      valid_horizontal_placement?(ship, coordinates)
       true
     end
+  end
+
+  def valid_vertical_placement?(ship, coordinates)
+    return true if all_letters_uniq?(coordinates) && all_numbers_same?(coordinates) && letters_sequential?(coordinates) && ship.length == coordinates.count
+  end
+
+  def valid_horizontal_placement?(ship, coordinates)
+    return true if all_letters_same?(coordinates) && numbers_sequential?(coordinates) && ship.length == coordinates.count
   end
 
   def all_letters_same?(coordinates)
