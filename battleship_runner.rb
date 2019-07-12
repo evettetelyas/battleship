@@ -49,6 +49,12 @@ loop do
     width = gets.chomp.to_i
   end
 
+  lesser_value = nil
+  if height > width
+    lesser_value = width
+  else lesser_value = height
+  end
+
   computer_board = Board.new(height, width)
   player_board = Board.new(height, width)
   game = Game.new(computer_board, player_board)
@@ -58,8 +64,8 @@ loop do
   print "> "
   ship_num = gets.chomp.to_i
 
-  until ship_num.between?(1,height - 1)
-    puts "you can only place between 1 and #{height - 1} ships. Pick again!"
+  until ship_num.between?(1,lesser_value - 1)
+    puts "you can only place between 1 and #{lesser_value - 1} ships. Pick again!"
     print "> "
     ship_num = gets.chomp.to_i
   end
